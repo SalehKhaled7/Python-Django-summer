@@ -1,0 +1,39 @@
+{% load static %}
+<html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>{%block title%}DJANGO CAR BUY-SELL{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="{%block description%}Default Description{% endblock %}">
+    <meta name="keywords" content="{%block keywords%}car, online, car-dealer{% endblock %}">
+    <meta name="robots" content="*">
+    <link rel="icon" href="#" type="image/x-icon">
+    <link rel="shortcut icon" href="#" type="image/x-icon">
+
+<!-- CSS Style -->
+    <link rel="stylesheet" type="text/css" href="stylesheet/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="stylesheet/font-awesome.css" media="all">
+    <link rel="stylesheet" type="text/css" href="stylesheet/bootstrap-select.css">
+    <link rel="stylesheet" type="text/css" href="stylesheet/revslider.css" >
+    <link rel="stylesheet" type="text/css" href="stylesheet/owl.carousel.css">
+    <link rel="stylesheet" type="text/css" href="stylesheet/owl.theme.css">
+    <link rel="stylesheet" type="text/css" href="stylesheet/jquery.bxslider.css">
+    <link rel="stylesheet" type="text/css" href="stylesheet/jquery.mobile-menu.css">
+    <link rel="stylesheet" type="text/css" href="stylesheet/style.css" media="all">
+    <link rel="stylesheet" type="text/css" href="stylesheet/responsive.css" media="all">
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,700italic,400,600,700,800" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Teko:300,400,500,600,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Saira+Condensed:300,400,500,600,700,800" rel="stylesheet">
+</head>
+{% include 'header.html'%}
+{% block slider%} {% endblock %}
+{% block content%} {% endblock %}
+{% include 'footer.html'%}
+{% include 'footer2.html'%}
+{% block footer%} {% endblock %}
+
+<body>
+
+</body>
+</html>
