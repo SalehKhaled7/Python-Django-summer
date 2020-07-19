@@ -4,6 +4,6 @@ from django.shortcuts import render
 
 # Create your views here.
 def index(request):
-    text = "car page"
+    text = "just a header"
     context = {'text': text}
-    return render(request, 'cars.html', context)
+    return render(request, 'index.html', context)
