@@ -1,3 +1,4 @@
+from ckeditor_uploader.fields import RichTextUploadingField
 from django.db import models
 import datetime
 
@@ -54,6 +55,7 @@ class car(models.Model):
     color = models.CharField(max_length=30)
     price = models.FloatField()
     doors = models.IntegerField()
+    details = RichTextUploadingField(blank=True)
     create_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
 
