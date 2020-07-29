@@ -1,9 +1,12 @@
 from django.http import HttpResponse
 from django.shortcuts import render
-
+from home.models import Setting
 
 # Create your views here.
+
+
 def index(request):
-    text = "just a header"
-    context = {'text': text}
-    return render(request, 'index.html', context)
+    setting = Setting.objects.get()
+    context = {'setting': setting}
+    return render(request,'index.html',context)
+
