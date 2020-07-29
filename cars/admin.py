@@ -8,19 +8,21 @@ class CarImagesInLine(admin.TabularInline):
 
 
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ['title', 'status']
+    list_display = ['title', 'status','image_tag']
     list_filter = ['status']
+    readonly_fields = ('image_tag',)
 
 
 class CarAdmin(admin.ModelAdmin):
-    list_display = ['title','model','color','status']
+    list_display = ['title','model','image_tag','color','status']
     list_filter = ['status']
     inlines = [CarImagesInLine]
+    readonly_fields = ('image_tag',)
 
 
 class ImageAdmin(admin.ModelAdmin):
-    list_display = ['title']
-
+    list_display = ['title','image_tag']
+    readonly_fields = ('image_tag',)
 
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(car, CarAdmin)
