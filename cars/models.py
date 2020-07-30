@@ -37,7 +37,7 @@ class Category(models.Model):
     image_tag.short_description = 'Image'
 
 
-class car(models.Model):
+class Car(models.Model):
     Status = (
         ('True', 'Yes'),
         ('False', 'NO'),
@@ -46,6 +46,7 @@ class car(models.Model):
     title = models.CharField(max_length=30)
     keywords = models.CharField(max_length=255)
     description = models.CharField(max_length=255)
+    slug = models.SlugField(blank=True,max_length=30)
     status = models.CharField(max_length=10, choices=Status)
     photo = models.ImageField(blank=True, upload_to='images/')
     manufacturer = models.CharField(max_length=30)
@@ -53,7 +54,7 @@ class car(models.Model):
     year_of_production = models.IntegerField('year', choices=year_choices(), default=current_year())
     engine_capacity = models.IntegerField()
     color = models.CharField(max_length=30)
-    price = models.FloatField()
+    price = models.FloatField(max_length=30)
     doors = models.IntegerField()
     details = RichTextUploadingField(blank=True)
     create_at = models.DateTimeField(auto_now_add=True)
@@ -69,7 +70,7 @@ class car(models.Model):
 
 
 class Image(models.Model):
-    cars = models.ForeignKey(car, on_delete=models.CASCADE)
+    cars = models.ForeignKey(Car, on_delete=models.CASCADE)
     title = models.CharField(max_length=30)
     image = models.ImageField(blank=True, upload_to='images/')
 

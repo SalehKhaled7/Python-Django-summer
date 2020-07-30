@@ -1,5 +1,5 @@
 from django.contrib import admin
-from cars.models import Category, car, Image
+from cars.models import Category, Car, Image
 
 
 class CarImagesInLine(admin.TabularInline):
@@ -25,5 +25,5 @@ class ImageAdmin(admin.ModelAdmin):
     readonly_fields = ('image_tag',)
 
 admin.site.register(Category, CategoryAdmin)
-admin.site.register(car, CarAdmin)
+admin.site.register(Car, CarAdmin)
 admin.site.register(Image, ImageAdmin)

@@ -1,6 +1,9 @@
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
+
+import cars
+from cars.models import Car
 from home.models import Setting, ContactForm, ContactFormMessage
 
 
@@ -9,7 +12,11 @@ from home.models import Setting, ContactForm, ContactFormMessage
 
 def index(request):
     setting = Setting.objects.get()
-    context = {'setting': setting , 'page':'index'}
+    slider_data = Car.objects.all()[:2]
+    context = {'setting': setting,
+               'page':'index',
+               'slider_data':slider_data,
+               }
     return render(request,'index.html',context)
 
 
