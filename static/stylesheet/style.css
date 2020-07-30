@@ -6670,7 +6670,7 @@ button.button.continue:before {
 	width: 48%;
 	text-align: left;
 	border: 0px #336600 solid;
-	padding-top: 0px;
+	padding-top: 50px;
 	padding-bottom: 0px;
 }
 .col2-set .col-1 ul.ul {
@@ -6679,6 +6679,7 @@ button.button.continue:before {
 }
 .col2-set .col-1 ul li {
 	list-style: disc;
+	padding-left: 50px;
 }
 .col2-set h5 {
 	font-size: 18px;
@@ -10292,12 +10293,13 @@ a.edit-bnt:hover {
 	margin: 2px 0 10px;
 }
 .form-list {
-	margin: 0;
+	margin: 0 0 0 50px;
 	padding: 0;
 	list-style: none;
 }
-.form-list li {
-	margin: 0 0 15px;
+.form-list p {
+	padding-top:10px;
+	padding-bottom:10px;
 	position: relative;
 }
 .form-list label {
@@ -13662,4 +13664,8 @@ select#shipping-address-select {
 		width:1320px
 	}
 	
+}
+#msg_to_admin{
+	background-color: #2c92de;
+	height: 200px;
 }

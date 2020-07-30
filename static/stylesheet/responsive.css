@@ -729,7 +729,7 @@ footer .coppyright {
 	width: 100%
 }
 #carousel-example-generic .carousel-caption {
-top40%
+	top:40%;
 }
 .category-description .slider-items-products .owl-buttons a {
 	left: 5px;
@@ -2498,7 +2498,7 @@ footer .coppyright {
 	top: 0px;
 }
 .our-features-box .feature-box .content {
-	margin-top: 8p;
+	margin-top: 8px;
 	text-align: left;
 	margin-bottom: 10px;
 }

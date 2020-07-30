@@ -4,9 +4,30 @@
 <body>
 <div id="page">
     {% include 'header.html'%}
-    <div class="content">
-        {{ setting.contact|safe }}
-    </div>
+<div account-login container>
+        <fieldset class="col2-set">
+            <div class="col-1 new-users">
+                <strong>SEND A MESSAGE TO US</strong>
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }}" role = alert">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                <form class="form-list" action="" method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <input type="submit" value="SEND">
+                </form>
+
+            </div>
+            <div class="col-2 registered-users">
+                {{ setting.contact|safe }}
+
+            </div> <!--col-2 registered-users-->
+        </fieldset> <!--col2-set-->
+</div>
 
 {% include 'footer.html'%}
 </div>
