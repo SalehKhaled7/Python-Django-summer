@@ -1,0 +1,15 @@
+{% load static %}
+<html lang="en">
+    {% include 'head.html' %}
+<body>
+<div id="page">
+    {% include 'header.html'%}
+    <div class="content">
+        {{ setting.contact|safe }}
+    </div>
+
+{% include 'footer.html'%}
+</div>
+{% include 'footer2.html'%}
+</body>
+</html>
