@@ -29,6 +29,7 @@ urlpatterns = [
     path('home/', include('home.urls')),
     path('admin/', admin.site.urls),
     path('ckeditor/', include('ckeditor_uploader.urls')),
+    path('buy/<int:id>/<slug:slug>', views.buy_a_car, name='buy_a_car'),
 
 ]
 

@@ -1,9 +1,7 @@
 from django.contrib import messages
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
-
-import cars
-from cars.models import Car
+from cars.models import Car, Category
 from home.models import Setting, ContactForm, ContactFormMessage
 
 
@@ -12,10 +10,12 @@ from home.models import Setting, ContactForm, ContactFormMessage
 
 def index(request):
     setting = Setting.objects.get()
-    slider_data = Car.objects.all()[:2]
+    slider_data = Car.objects.all()[:5]
+    category = Category.objects.all()
     context = {'setting': setting,
                'page':'index',
                'slider_data':slider_data,
+               'category': category,
                }
     return render(request,'index.html',context)
 
@@ -44,3 +44,8 @@ def contact(request):
     form = ContactForm()
     context = {'setting': setting,'form':form}
     return render(request,'contact_us.html',context)
+
+def buy_a_car(request,id,slug):
+    setting = Setting.objects.get()
+    cars = Car.objects.filter(category_id=id)
+    return HttpResponse(cars)

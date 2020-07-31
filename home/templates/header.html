@@ -1,4 +1,5 @@
 {% load static %}
+{% load mptt_tags %}
 <header>
     <div class="container">
       <div class="row">
@@ -115,6 +116,7 @@
                     <!-- BEGIN NAV -->
                     <ul id="nav" class="hidden-xs">
                       <li class="active"> <a class="level-top" href="home/"><span>Home</span></a></li>
+
                       <li class="mega-menu"> <a class="level-top" href="grid1.html"><span>buy a vehicle</span></a>
                         <div class="level0-wrapper dropdown-6col" style="left: 0px; display: none;">
                           <div class="container">
@@ -122,113 +124,21 @@
                               <div class="nav-block nav-block-center">
                                 <!--mega menu-->
                                 <ul class="level0">
-                                  <li class="level3 nav-6-1 parent item"> <a href="grid.html"><span>Audio</span></a>
+                                    {% recursetree category %}
+                                  <li class="level3 nav-6-1 parent item"> <a href="/buy/{{ node.id }}/{{ node.slug }}"><span>{{ node.title }}</span></a>
                                     <!--sub sub category-->
+                                      {% if not node.is_leaf_node %}
                                     <ul class="level1">
-                                      <li class="level2 nav-6-1-1"> <a href="grid.html"><span>Amplifiers</span></a> </li>
-                                      <!--level2 nav-6-1-1-->
-                                      <li class="level2 nav-6-1-1"> <a href="grid.html"><span>Installation Parts</span></a> </li>
-                                      <!--level2 nav-6-1-1-->
-                                      <li class="level2 nav-6-1-1"> <a href="grid.html"><span>Speakers</span></a> </li>
-                                      <!--level2 nav-6-1-1-->
-                                      <li class="level2 nav-6-1-1"> <a href="grid.html"><span>Stereos</span></a> </li>
-                                      <!--level2 nav-6-1-1-->
-                                      <li class="level2 nav-6-1-1"> <a href="grid.html"><span>Subwoofers</span></a> </li>
+                                      <li class="level2 nav-6-1-1"> <a href="grid.html"><span>{{ children }}</span></a> </li>
                                       <!--level2 nav-6-1-1-->
                                     </ul>
+                                      {% endif %}
                                     <!--level1-->
                                     <!--sub sub category-->
                                   </li>
                                   <!--level3 nav-6-1 parent item-->
-                                  <li class="level3 nav-6-1 parent item"> <a href="grid.html"><span>Body Parts</span></a>
-                                    <!--sub sub category-->
-                                    <ul class="level1">
-                                      <li class="level2 nav-6-1-1"> <a href="grid.html"><span>Bumpers</span></a> </li>
-                                      <!--level2 nav-6-1-1-->
-                                      <li class="level2 nav-6-1-1"> <a href="grid.html"><span>Doors</span></a> </li>
-                                      <!--level2 nav-6-1-1-->
-                                      <li class="level2 nav-6-1-1"> <a href="grid.html"><span>Fenders</span></a> </li>
-                                      <!--level2 nav-6-1-1-->
-                                      <li class="level2 nav-6-1-1"> <a href="grid.html"><span>Grilles</span></a> </li>
-                                      <!--level2 nav-6-1-1-->
-                                      <li class="level2 nav-6-1-1"> <a href="grid.html"><span>Hoods</span></a> </li>
-                                      <!--level2 nav-6-1-1-->
-                                    </ul>
-                                    <!--level1-->
-                                    <!--sub sub category-->
-                                  </li>
-                                  <!--level3 nav-6-1 parent item-->
-                                  <li class="level3 nav-6-1 parent item"> <a href="grid.html"><span>Exterior</span></a>
-                                    <!--sub sub category-->
-                                    <ul class="level1">
-                                      <li class="level2 nav-6-1-1"> <a href="grid.html"><span>Bed Accessories</span></a> </li>
-                                      <!--level2 nav-6-1-1-->
-                                      <li class="level2 nav-6-1-1"> <a href="grid.html"><span>Body Kits</span></a> </li>
-                                      <!--level2 nav-6-1-1-->
-                                      <li class="level2 nav-6-1-1"> <a href="grid.html"><span>Custom Grilles</span></a> </li>
-                                      <!--level2 nav-6-1-1-->
-                                      <li class="level2 nav-6-1-1"> <a href="grid.html"><span>Car Covers</span></a> </li>
-                                      <!--level2 nav-6-1-1-->
-                                      <li class="level2 nav-6-1-1"> <a href="grid.html"><span>Off-Road Bumpers</span></a> </li>
-                                      <!--level2 nav-6-1-1-->
-                                    </ul>
-                                    <!--level1-->
-                                    <!--sub sub category-->
-                                  </li>
-                                  <!--level3 nav-6-1 parent item-->
-                                  <li class="level3 nav-6-1 parent item"> <a href="grid.html"><span>Interior</span></a>
-                                    <!--sub sub category-->
-                                    <ul class="level1">
-                                      <li class="level2 nav-6-1-1"> <a href="grid.html"><span>Custom Gauges</span></a> </li>
-                                      <!--level2 nav-6-1-1-->
-                                      <li class="level2 nav-6-1-1"> <a href="grid.html"><span>Dash Kits</span></a> </li>
-                                      <!--level2 nav-6-1-1-->
-                                      <li class="level2 nav-6-1-1"> <a href="grid.html"><span>Seat Covers</span></a> </li>
-                                      <!--level2 nav-6-1-1-->
-                                      <li class="level2 nav-6-1-1"> <a href="grid.html"><span>Steering Wheels</span></a> </li>
-                                      <!--level2 nav-6-1-1-->
-                                      <li class="level2 nav-6-1-1"> <a href="grid.html"><span>Sun Shades</span></a> </li>
-                                      <!--level2 nav-6-1-1-->
-                                    </ul>
-                                    <!--level1-->
-                                    <!--sub sub category-->
-                                  </li>
-                                  <!--level3 nav-6-1 parent item-->
-                                  <li class="level3 nav-6-1 parent item"> <a href="grid.html"><span>Lighting</span></a>
-                                    <!--sub sub category-->
-                                    <ul class="level1">
-                                      <li class="level2 nav-6-1-1"> <a href="grid.html"><span>Fog Lights</span></a> </li>
-                                      <!--level2 nav-6-1-1-->
-                                      <li class="level2 nav-6-1-1"> <a href="grid.html"><span>Headlights</span></a> </li>
-                                      <!--level2 nav-6-1-1-->
-                                      <li class="level2 nav-6-1-1"> <a href="grid.html"><span>LED Lights</span></a> </li>
-                                      <!--level2 nav-6-1-1-->
-                                      <li class="level2 nav-6-1-1"> <a href="grid.html"><span>Off-Road Lights</span></a> </li>
-                                      <!--level2 nav-6-1-1-->
-                                      <li class="level2 nav-6-1-1"> <a href="grid.html"><span>Signal Lights</span></a> </li>
-                                      <!--level2 nav-6-1-1-->
-                                    </ul>
-                                    <!--level1-->
-                                    <!--sub sub category-->
-                                  </li>
-                                  <!--level3 nav-6-1 parent item-->
-                                  <li class="level3 nav-6-1 parent item"> <a href="grid.html"><span>Performance</span></a>
-                                    <!--sub sub category-->
-                                    <ul class="level1">
-                                      <li class="level2 nav-6-1-1"> <a href="grid.html"><span>Air Intake Systems</span></a> </li>
-                                      <!--level2 nav-6-1-1-->
-                                      <li class="level2 nav-6-1-1"> <a href="grid.html"><span>Brakes</span></a> </li>
-                                      <!--level2 nav-6-1-1-->
-                                      <li class="level2 nav-6-1-1"> <a href="grid.html"><span>Exhaust Systems</span></a> </li>
-                                      <!--level2 nav-6-1-1-->
-                                      <li class="level2 nav-6-1-1"> <a href="grid.html"><span>Power Adders</span></a> </li>
-                                      <!--level2 nav-6-1-1-->
-                                      <li class="level2 nav-6-1-1"> <a href="grid.html"><span>Racing Gear</span></a> </li>
-                                      <!--level2 nav-6-1-1-->
-                                    </ul>
-                                    <!--level1-->
-                                    <!--sub sub category-->
-                                  </li>
+
+                                    {% endrecursetree %}
                                   <!--level3 nav-6-1 parent item-->
                                 </ul>
                                 <!--level0-->
