@@ -6,4 +6,4 @@ from django.shortcuts import render
 def index(request):
     text = "car page"
     context = {'text': text}
-    return render(request, 'cars.html', context)
+    return render(request, 'buy.html', context)

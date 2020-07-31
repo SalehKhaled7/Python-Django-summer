@@ -22,7 +22,8 @@ def index(request):
 
 def about_us(request):
     setting = Setting.objects.get()
-    context = {'setting': setting,'page':'about_us'}
+    category = Category.objects.all()
+    context = {'setting': setting,'page':'about_us','category': category,}
     return render(request,'about_us.html',context)
 
 
@@ -41,11 +42,15 @@ def contact(request):
             return HttpResponseRedirect("/contact")
 
     setting = Setting.objects.get()
+    category = Category.objects.all()
     form = ContactForm()
-    context = {'setting': setting,'form':form}
+    context = {'setting': setting,'form':form,'category': category,}
     return render(request,'contact_us.html',context)
 
-def buy_a_car(request,id,slug):
+
+def buy_a_car(request, id, slug):
     setting = Setting.objects.get()
     cars = Car.objects.filter(category_id=id)
-    return HttpResponse(cars)
+    category = Category.objects.all()
+    context = {'setting': setting,'category': category,'cars': cars,}
+    return render(request,'buy.html',context)
