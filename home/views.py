@@ -12,10 +12,14 @@ def index(request):
     setting = Setting.objects.get()
     slider_data = Car.objects.all()[:5]
     category = Category.objects.all()
+    week_deals = Car.objects.all()[:5]
+    best_sell = Car.objects.all().order_by('?')[:5]
     context = {'setting': setting,
                'page':'index',
                'slider_data':slider_data,
                'category': category,
+               'week_deals': week_deals,
+               'best_sell': best_sell,
                }
     return render(request,'index.html',context)
 

@@ -44,8 +44,16 @@ class Category(MPTTModel):
 
 class Car(models.Model):
     Status = (
-        ('True', 'Yes'),
+        ('new', 'Yes'),
         ('False', 'NO'),
+    )
+    TRANSMISSION = (
+        ('manual', 'MANUAL'),
+        ('automatic', ' AUTOMATIC'),
+    )
+    STATE = (
+        ('new', 'NEW'),
+        ('used', 'USED'),
     )
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     title = models.CharField(max_length=30)
@@ -58,6 +66,9 @@ class Car(models.Model):
     model = models.CharField(max_length=30)
     year_of_production = models.IntegerField('year', choices=year_choices(), default=current_year())
     engine_capacity = models.IntegerField()
+    transmission = models.CharField(max_length=10, choices=TRANSMISSION)
+    km = models.IntegerField()
+    state = models.CharField(max_length=10, choices=STATE)
     color = models.CharField(max_length=30)
     price = models.FloatField(max_length=30)
     doors = models.IntegerField()
