@@ -1,6 +1,24 @@
 {% load static %}
 {% load mptt_tags %}
 <header>
+<script>
+
+  $(function() {
+    $("#query").autocomplete({
+      source: "/search_auto/",
+      select: function (event, ui) { //item selected
+        AutoCompleteSelectHandler(event, ui)
+      },
+      minLength: 2,
+    });
+  });
+
+  function AutoCompleteSelectHandler(event, ui)
+  {
+    var selectedObj = ui.item;
+  }
+
+</script>
     <div class="container">
       <div class="row">
         <div id="header">
@@ -96,12 +114,12 @@
                   </div>
                 </div>
                 <!--mini-cart-->
-                <div class="collapse navbar-collapse">
+                <div class="">
                   <form class="navbar-form" role="search" action="/search/" method="post">
                       {% csrf_token %}
                     <div class="input-group">
-                      <input name="query" type="text" class="form-control" placeholder="Search">
-                      <span class="input-group-btn">
+                      <input name="query" id="query" type="text" class="form-control" placeholder="Search">
+                        <span class="input-group-btn">
                       <button type="submit" class="search-btn"> <span class="glyphicon glyphicon-search"> <span class="sr-only">Search</span> </span> </button>
                       </span>
                     </div>
@@ -236,4 +254,8 @@
         </div>
       </div>
     </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"> </script>
+<!-- jQuery UI !-->
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
   </header>

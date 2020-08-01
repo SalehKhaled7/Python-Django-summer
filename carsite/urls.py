@@ -33,6 +33,7 @@ urlpatterns = [
     path('buy/<int:id>/<slug:slug>', views.buy_a_car, name='buy_a_car'),
     path('car/<int:id>/<slug:slug>', views.car_details, name='car_details'),
     path('search/', views.car_search, name='car_search'),
+    path('search_auto/',views.car_search_auto, name='car_search_auto'),
 
 ]
 

@@ -1,3 +1,5 @@
+import json
+
 from django.contrib import messages
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
@@ -82,3 +84,18 @@ def car_search(request):
             return render(request, 'car_search.html', context)
     return HttpResponseRedirect('/')
 
+
+def car_search_auto(request):
+    if request.is_ajax():
+        q = request.GET.get('term', '')
+        cars = Car.objects.filter(title__icontains=q)
+        results = []
+        for rs in cars:
+            car_json = {}
+            car_json = rs.title
+            results.append(car_json)
+        data = json.dumps(results)
+    else:
+        data = 'fail'
+    mimetype = 'application/json'
+    return HttpResponse(data, mimetype)
