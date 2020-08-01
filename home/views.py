@@ -2,6 +2,7 @@ from django.contrib import messages
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
 from cars.models import Car, Category, Image
+from home.forms import SearchForm
 from home.models import Setting, ContactForm, ContactFormMessage
 
 
@@ -60,11 +61,24 @@ def buy_a_car(request, id, slug):
     return render(request,'buy.html',context)
 
 
-def car_details(request,id, slug):
-
+def car_details(request,id,slug):
     setting = Setting.objects.get()
     car = Car.objects.get(pk=id)
     images = Image.objects.filter(cars_id=id)
     category = Category.objects.all()
     context = {'setting': setting,'category': category,'car': car,'images': images,}
     return render(request,'car_details.html',context)
+
+
+def car_search(request):
+    if request.method == "POST":
+        form = SearchForm(request.POST)
+        if form.is_valid():
+            category = Category.objects.all()
+            query = form.cleaned_data['query']
+            cars = Car.objects.filter(title__icontains=query)
+            context = {'cars': cars,
+                       'category': category,}
+            return render(request, 'car_search.html', context)
+    return HttpResponseRedirect('/')
+

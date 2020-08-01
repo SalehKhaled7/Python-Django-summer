@@ -1,7 +1,7 @@
 from django.contrib import admin
 from mptt.admin import DraggableMPTTAdmin
 
-from cars.models import Category, Car, Image
+from cars.models import Category, Car, Image, Comment
 
 
 class CarImagesInLine(admin.TabularInline):
@@ -50,6 +50,14 @@ class ImageAdmin(admin.ModelAdmin):
     list_display = ['title','image_tag']
     readonly_fields = ('image_tag',)
 
+
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ['subject', 'comment', 'car', 'user', 'status']
+    list_filter = ['status']
+
+
 admin.site.register(Category,CategoryAdmin2)
 admin.site.register(Car, CarAdmin)
 admin.site.register(Image, ImageAdmin)
+
+admin.site.register(Comment,CommentAdmin)
