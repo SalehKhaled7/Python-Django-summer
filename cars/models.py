@@ -71,6 +71,7 @@ class Car(models.Model):
     state = models.CharField(max_length=10, choices=STATE)
     color = models.CharField(max_length=30)
     price = models.FloatField(max_length=30)
+    fuel_type = models.CharField(max_length=30)
     doors = models.IntegerField()
     details = RichTextUploadingField(blank=True)
     create_at = models.DateTimeField(auto_now_add=True)
