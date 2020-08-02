@@ -1,8 +1,10 @@
 from ckeditor_uploader.fields import RichTextUploadingField
+from django.contrib.auth.models import User
 from django.db import models
 
 # Create your models here.
 from django.forms import ModelForm, TextInput, Textarea
+from django.utils.safestring import mark_safe
 
 
 class Setting(models.Model):
@@ -39,15 +41,15 @@ class Setting(models.Model):
 
 class ContactFormMessage(models.Model):
     STATUS = (
-        ('New','New'),
-        ('Read','Read'),
+        ('New', 'New'),
+        ('Read', 'Read'),
         ('Closed', 'Closed'),
     )
-    name = models.CharField(blank=True,max_length=20)
+    name = models.CharField(blank=True, max_length=20)
     email = models.CharField(blank=True, max_length=50)
     subject = models.CharField(blank=True, max_length=50)
     message = models.TextField(blank=True, max_length=255)
-    status = models.CharField(max_length=10,choices=STATUS,default='New')
+    status = models.CharField(max_length=10, choices=STATUS, default='New')
     ip = models.CharField(blank=True, max_length=20)
     note = models.CharField(blank=True, max_length=20)
     create_at = models.DateTimeField(auto_now_add=True)
@@ -60,10 +62,34 @@ class ContactFormMessage(models.Model):
 class ContactForm(ModelForm):
     class Meta:
         model = ContactFormMessage
-        fields = ['name','email','subject','message',]
+        fields = ['name', 'email', 'subject', 'message', ]
         widgets = {
-            'name': TextInput(attrs={'class':'input'}),
-            'email': TextInput(attrs={'class':'input'}),
-            'subject': TextInput(attrs={'class':'input'}),
-            'message': Textarea(attrs={'class':'input','rows':'5'}),
+            'name': TextInput(attrs={'class': 'input'}),
+            'email': TextInput(attrs={'class': 'input'}),
+            'subject': TextInput(attrs={'class': 'input'}),
+            'message': Textarea(attrs={'class': 'input', 'rows': '5'}),
         }
+
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    phone = models.CharField(blank=True, max_length=20)
+    address = models.CharField(blank=True, max_length=150)
+    city = models.CharField(blank=True, max_length=20)
+    country = models.CharField(blank=True, max_length=20)
+    image = models.ImageField(blank=True, upload_to='images/users/')
+
+    def __str__(self):
+        return self.user.username
+
+    def user_name(self):
+        return '[' + self.user.username + ']' + self.user.first_name + ' ' + self.user.last_name
+
+    def image_tag(self):
+        return mark_safe('<img src="{}" height="50"/>'.format(self.image.url))
+
+
+class UserProfileForm(ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = ['phone','address','city','country','image']
