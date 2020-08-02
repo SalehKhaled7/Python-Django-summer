@@ -5,7 +5,7 @@ from django.contrib.auth import logout, authenticate, login
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
 from cars.models import Car, Category, Image
-from home.forms import SearchForm
+from home.forms import SearchForm, SignUpForm
 from home.models import Setting, ContactForm, ContactFormMessage
 
 
@@ -123,3 +123,25 @@ def login_view(request):
     category = Category.objects.all()
     context = {'category': category,}
     return render(request,'login.html', context)
+
+
+def signup_view(request):
+    if request.method == "POST":
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password1')
+            user = authenticate(request, username=username, password=password)
+            login(request,user)
+            return HttpResponseRedirect('/')
+
+    form = SignUpForm()
+    category = Category.objects.all()
+    context = {'category': category,
+               'form': form, }
+    return render(request, 'signup.html', context)
+
+
+
+
