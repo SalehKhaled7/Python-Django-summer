@@ -40,81 +40,23 @@
               </div>
               <div class="fl-header-right">
                 <div class="fl-links">
-                  <div class="no-js"> <a title="" class="clicker"></a>
-                    <div class="fl-nav-links">
-                      <div class="language-currency">
-                        <div class="fl-language">
-                        <h3>Language</h3>
-                          <ul class="lang">
-                            <li><a href="#"> <img src="{%static 'images/english.png'%}" alt="English"> <span>English</span> </a></li>
-                            <li><a href="#"> <img src="{%static 'images/francais.png'%}" alt="French"> <span>French</span> </a></li>
-                            <li><a href="#"> <img src="{%static 'images/german.png'%}" alt="German"> <span>German</span> </a></li>
-                          </ul>
-                        </div>
-                        <!--fl-language-->
-                        <!-- END For version 1,2,3,4,6 -->
-                        <!-- For version 1,2,3,4,6 -->
-                        <div class="fl-currency">
-                         <h3>Currency</h3>
-                          <ul class="currencies_list">
-                            <li><a href="#" title="EGP"> <strong>£</strong> Pound Sterling</a></li>
-                            <li><a href="#" title="EUR"> <strong>€</strong> Euro</a></li>
-                            <li><a href="#" title="USD"> <strong>$</strong> US Dollar</a></li>
-                          </ul>
-                        </div>
-                        <!--fl-currency-->
-                        <!-- END For version 1,2,3,4,6 -->
-                      </div>
-                       <h3>My Acount</h3>
-                      <ul class="links">
-                        <li><a href="login.html" title="My Account">Login</a></li>
-                        <li><a href="login.html" title="Wishlist">Register</a></li>
-                        </ul>
-                    </div>
+                  <div class="no-js">
+                     {% if user.is_authenticated %}
+                         <a title="" class="clicker">{{ user.get_username }}</a>
+                             <div class="fl-nav-links">
+                                  <ul class="links">
+                                    <li><a href="/usermsg" title="My Account">messages</a></li>
+                                    <li><a href="/userads/" title="My Account">my ads</a></li>
+                                    <li><a href="/logout/" title="My Account">logout</a></li>
+                                 </ul>
+                             </div>
+                     {% else %}
+                         <a title=""  href="/login"><h2>Login/Register</h2></a>
+                     {% endif %}
+                        <!-- login end-->
                   </div>
                 </div>
-                <div class="fl-cart-contain">
-                  <div class="mini-cart">
-                    <div class="basket"> <a href="shopping-cart.html"><span> 2 </span></a> </div>
-                    <div class="fl-mini-cart-content" style="display: none;">
-                      <div class="block-subtitle">
-                        <div class="top-subtotal">2 items, <span class="price">$259.99</span> </div>
-                        <!--top-subtotal-->
-                        <!--pull-right-->
-                      </div>
-                      <!--block-subtitle-->
-                      <ul class="mini-products-list" id="cart-sidebar">
-                        <li class="item first">
-                          <div class="item-inner"><a class="product-image" title="timi &amp; leslie Sophia Diaper Bag, Lemon Yellow/Shadow White" href="#l"><img alt="timi &amp; leslie Sophia Diaper Bag, Lemon Yellow/Shadow White" src="{%static 'products-images/p4.jpg'%}"></a>
-                            <div class="product-details">
-                              <div class="access"><a class="btn-remove1" title="Remove This Item" href="#">Remove</a> <a class="btn-edit" title="Edit item" href="#"><i class="icon-pencil"></i><span class="hidden">Edit item</span></a> </div>
-                              <!--access-->
-                              <strong>1</strong> x <span class="price">$179.99</span>
-                              <p class="product-name"><a href="accessories-detail.html">timi &amp; leslie Sophia Diaper Bag...</a></p>
-                            </div>
-                          </div>
-                        </li>
-                        <li class="item last">
-                          <div class="item-inner"><a class="product-image" title="JP Lizzy Satchel Designer Diaper Bag - Slate Citron" href="#"><img alt="JP Lizzy Satchel Designer Diaper Bag - Slate Citron" src="{%static 'products-images/p3.jpg'%}"></a>
-                            <div class="product-details">
-                              <div class="access"><a class="btn-remove1" title="Remove This Item" href="#">Remove</a> <a class="btn-edit" title="Edit item" href="#"><i class="icon-pencil"></i><span class="hidden">Edit item</span></a> </div>
-                              <!--access-->
-                              <strong>1</strong> x <span class="price">$80.00</span>
-                              <p class="product-name"><a href="accessories-detail.html">JP Lizzy Satchel Designer Diaper Ba...</a></p>
-                            </div>
-                          </div>
-                        </li>
-                      </ul>
-                      <div class="actions">
-                        <button class="btn-checkout" title="Checkout" type="button" onClick="window.location=checkout.html"><span>Checkout</span></button>
-                      </div>
-                      <!--actions-->
-                    </div>
-                    <!--fl-mini-cart-content-->
-                  </div>
-                </div>
-                <!--mini-cart-->
-                <div class="">
+                <div class="collapse navbar-collapse">
                   <form class="navbar-form" role="search" action="/search/" method="post">
                       {% csrf_token %}
                     <div class="input-group">
@@ -183,12 +125,7 @@
                           <li class="level1 first parent"><a href="accessories-detail.html"><span>Accessories Detail</span></a> </li>
                         </ul>
                       </li>
-                      <li class="level0 parent drop-menu"> <a class="level-top" href="/aboutus/"><span>about us</span></a>
-                        <ul class="level1">
-                          <li class="level1 first"><a href="blog.html"><span>Blog List</span></a></li>
-                          <li class="level1 nav-10-2"> <a href="blog-detail.html"> <span>Blog Detail</span> </a> </li>
-                        </ul>
-                      </li>
+                      <li class="level0 parent drop-menu"> <a class="level-top" href="/aboutus/"><span>about us</span></a></li>
                       <li class="mega-menu hidden-sm"> <a class="level-top" href="/contact/"><span>contact us‎</span></a> </li>
                       <li class="level0 parent drop-menu"><a href="#"><span>Pages</span> </a>
                         <!--sub sub category-->
