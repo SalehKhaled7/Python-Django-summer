@@ -1,0 +1,70 @@
+{% load static %}
+<html lang="en">
+<head>
+    <title>user panel</title>
+    {% include 'head.html' %}
+</head>
+
+<body>
+<div id="page">
+    {% include 'header.html' %}
+    <section class="main-container col2-left-layout bounceInUp animated">
+        <div class="container">
+            <div class="row">
+                <div class="col-main col-sm-9 col-sm-push-3 product-grid">
+                    <div class="pro-coloumn">
+                        <article class="col-main">
+                            <div class="toolbar">
+                                <div class="sorter">
+                                    <h1> type here what ever u want 1</h1>
+                                </div>
+                            </div>
+                            <div class="category-products"> <!-- main right-->
+                                <h1> type here what ever u want 2</h1>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+                <aside class="col-left sidebar col-sm-3 col-xs-12 col-sm-pull-9 wow bounceInUp animated">
+                    <div class="side-nav-categories">
+                        <div id="profile_pic_div"><img id="profile_pic" src="{{ profile.image.url }}" /></div>
+
+                        <div class="box-content box-category">
+                            <ul id="user_info">
+                                <li><span class="user_info_attr">user name:</span> {{ profile.user.first_name }} {{ profile.user.last_name }}</li>
+                                <li><span class="user_info_attr">phone number:</span> {{ profile.phone }}</li>
+                                <li><span class="user_info_attr">email:</span> {{ profile.user.email }}</li>
+                                <li><span class="user_info_attr">country:</span> {{ profile.country }}</li>
+                                <li><span class="user_info_attr">city:</span> {{ profile.city }}</li>
+                            </ul>
+                        </div>
+                         <hr style="width: 75%;border-width: 2px;border-color:#2e6da4" >
+                        <div class="midd">
+                            <ul id="user_nav">
+                                <a href="/user">
+                                    <li>my info</li>
+                                </a>
+                                <a href="/user">
+                                    <li>messages</li>
+                                </a>
+                                <a href="/user">
+                                    <li>my ads</li>
+                                </a>
+                                <a href="/user">
+                                    <li>favorite</li>
+                                </a>
+                            </ul>
+                        </div>
+                    </div>
+                </aside>
+                <!--col-right sidebar-->
+            </div>
+            <!--row-->
+        </div>
+    </section>
+
+    {% include 'footer.html' %}
+</div>
+{% include 'footer2.html' %}
+</body>
+</html>
