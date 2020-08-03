@@ -1,6 +1,11 @@
 {% load static %}
 <html lang="en">
+       <head>
+    <title>{{ car.title }}</title>
+    <meta name="description" content="{{setting.description}}">
+    <meta name="keywords" content="{{setting.keywords}}">
     {% include 'head.html' %}
+</head>
 <body>
 <div id="page">
     {% include 'header.html'%}

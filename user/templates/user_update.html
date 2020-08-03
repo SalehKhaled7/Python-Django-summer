@@ -3,17 +3,9 @@
 <head>
     <title>user panel</title>
     <style>
-        #profile_pic_div{
-            height: auto;
-        }
 
-        #profile_pic {
 
-            float: left;
-            padding: 20px;
-            width: 25%;
-            height: auto;
-        }
+
         #user-info{
             display: flex;
         }
@@ -67,9 +59,9 @@
 
         }
         .box-content{
-            margin-top: 50px;
+            margin-top: 10px;
             float: right;
-            width: 75%;
+            width: 100%;
 
         }
 
@@ -88,33 +80,29 @@
                         <article class="col-main">
                             <div class="toolbar">
                                 <div class="sorter">
-                                   <h3 style="margin-bottom: 0;margin-top: 0"> User Info</h3>
+                                   <h3 style="margin-bottom: 0;margin-top: 0"> Edit user info</h3>
                                 </div>
                             </div>
                             <div class="category-products"> <!-- main right-->
 
-                                <div id="profile_pic_div"><img id="profile_pic" src="{{ profile.image.url }}"/></div>
-                                <div class="box-content box-category">
 
-                                    <ul id="user_info">
-                                        <li id="user_info_name"><span
-                                                >{{ profile.user.first_name }} {{ profile.user.last_name }}</span>
-                                        </li>
-                                        <li id="user_info_attr"><span id="sp_attr">Phone number:</span>  {{ profile.phone }}</li>
-                                        <li id="user_info_attr"><span id="sp_attr">Email:</span> {{ profile.user.email }}</li>
-                                        <li id="user_info_attr"><span id="sp_attr">Country:</span>  {{ profile.country }}</li>
-                                        <li id="user_info_attr"><span id="sp_attr">City:</span>  {{ profile.city }}</li>
-                                        <li id="user_info_attr"><span id="sp_attr">Address:</span>  {{ profile.address }}</li>
-                                        <li><a href="/user/update/">update</a></li>
-                                    </ul>
+                                <div class="box-content box-category">
+                                    <form method="POST" enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                        <fieldset class="form-group">
+                                            {{ user_form.as_p }}
+                                            {{ profile_form.as_p}}
+                                        </fieldset>
+                                        <div class="form-group">
+                                            <button class="primary-btn" type="submit">Update</button>
+                                        </div>
+                                    </form>
+
 
                                 </div>
-
                             </div>
                         </article>
-
                     </div>
-
                 </div>
                 <aside class="col-left sidebar col-sm-3 col-xs-12 col-sm-pull-9 wow bounceInUp animated">
                     <div class="side-nav-categories">
@@ -142,12 +130,9 @@
                             </ul>
                         </div>
                     </div>
-
                 </aside>
                 <!--col-right sidebar-->
-
             </div>
-
             <!--row-->
         </div>
     </section>

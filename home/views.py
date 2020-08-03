@@ -5,11 +5,10 @@ from django.contrib.auth import logout, authenticate, login
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
 from cars.models import Car, Category, Image
-from home.forms import SearchForm, SignUpForm
+from home.forms import SearchForm
 from home.models import Setting, ContactForm, ContactFormMessage
-
-
-# Create your views here.
+from user.forms import SignUpForm
+from user.models import UserProfile
 
 
 def index(request):
@@ -134,6 +133,10 @@ def signup_view(request):
             password = form.cleaned_data.get('password1')
             user = authenticate(request, username=username, password=password)
             login(request,user)
+            current_user = request.user
+            data = UserProfile()
+            data.user_id = current_user.id
+            data.save()
             return HttpResponseRedirect('/')
 
     form = SignUpForm()
