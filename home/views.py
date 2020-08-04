@@ -1,5 +1,4 @@
 import json
-
 from django.contrib import messages
 from django.contrib.auth import logout, authenticate, login
 from django.http import HttpResponseRedirect, HttpResponse

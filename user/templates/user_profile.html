@@ -92,6 +92,15 @@
                                 </div>
                             </div>
                             <div class="category-products"> <!-- main right-->
+                                {% if messages %}
+                                    {% for message in messages %}
+                                         <div style="color:green; font-size: medium; text-align: center">
+
+                                        {{ message|safe }}
+                                         </div>
+
+                                    {% endfor %}
+                                {% endif %}
 
                                 <div id="profile_pic_div"><img id="profile_pic" src="{{ profile.image.url }}"/></div>
                                 <div class="box-content box-category">
@@ -105,7 +114,8 @@
                                         <li id="user_info_attr"><span id="sp_attr">Country:</span>  {{ profile.country }}</li>
                                         <li id="user_info_attr"><span id="sp_attr">City:</span>  {{ profile.city }}</li>
                                         <li id="user_info_attr"><span id="sp_attr">Address:</span>  {{ profile.address }}</li>
-                                        <li><a href="/user/update/">update</a></li>
+                                        <li ><a href="/user/update/">update info</a></li>
+                                        <li ><a href="/user/password/">change password</a></li>
                                     </ul>
 
                                 </div>
@@ -116,34 +126,7 @@
                     </div>
 
                 </div>
-                <aside class="col-left sidebar col-sm-3 col-xs-12 col-sm-pull-9 wow bounceInUp animated">
-                    <div class="side-nav-categories">
-
-
-
-
-                        <div class="midd">
-                            <ul id="user_nav">
-                                <a href="/user">
-                                    <li>my info</li>
-                                </a>
-                                <a href="/user">
-                                    <li>messages</li>
-                                </a>
-                                <a href="/user">
-                                    <li>my ads</li>
-                                </a>
-                                <a href="/user">
-                                    <li>favorite</li>
-                                </a>
-                                 <a href="/logout">
-                                    <li>logout</li>
-                                </a>
-                            </ul>
-                        </div>
-                    </div>
-
-                </aside>
+                {% include 'user_nav.html' %}
                 <!--col-right sidebar-->
 
             </div>
