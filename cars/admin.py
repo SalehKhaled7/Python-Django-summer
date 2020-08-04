@@ -41,7 +41,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
 
 class CarAdmin(admin.ModelAdmin):
-    list_display = ['title','model','image_tag','color','status']
+    list_display = ['title','model','image_tag','status']
     list_filter = ['status']
     inlines = [CarImagesInLine]
     prepopulated_fields = {'slug': ('title',)}
@@ -61,5 +61,4 @@ class CommentAdmin(admin.ModelAdmin):
 admin.site.register(Category,CategoryAdmin2)
 admin.site.register(Car, CarAdmin)
 admin.site.register(Image, ImageAdmin)
-
 admin.site.register(Comment,CommentAdmin)

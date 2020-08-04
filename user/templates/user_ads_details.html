@@ -1,0 +1,75 @@
+{% load static %}
+<html lang="en">
+<head>
+    <title>user panel</title>
+
+</head>
+
+<body>
+<div id="page">
+    {% include 'header.html' %}
+    <section class="main-container col2-left-layout bounceInUp animated">
+        <div class="container">
+            <div class="row">
+                <div class="col-main col-sm-9 col-sm-push-3 product-grid">
+                    <div class="pro-coloumn">
+                        <article class="col-main">
+                            <div class="toolbar">
+                                <div class="sorter">
+                                   <h3 style="margin-bottom: 0;margin-top: 0">my ads</h3>
+                                </div>
+                            </div>
+                            <div class="category-products"> <!-- main right-->
+
+
+                                <div id="profile_pic_div">
+                                    <div><img id="profile_pic" src="{{ object.photo.url }}"/></div>
+                                    <div><a href="#" class="ads_btn">update</a></div>
+                                </div>
+                                <div class="box-content box-category">
+
+
+                                    <ul id="user_info">
+                                        <li id="user_info_name"><span
+                                                >{{ object.title }}</span>
+                                        </li>
+                                        <li id="user_info_attr"><span id="sp_attr">category:</span>  {{ object.category }}</li>
+                                        <li id="user_info_attr"><span id="sp_attr">keywords:</span> {{ object.keywords }}</li>
+                                        <li id="user_info_attr"><span id="sp_attr">description:</span>  {{ object.description }}</li>
+                                        <li id="user_info_attr"><span id="sp_attr">slug:</span>  {{ object.slug }}</li>
+                                        <li id="user_info_attr"><span id="sp_attr">manufacturer:</span>  {{ object.manufacturer }}</li>
+                                        <li id="user_info_attr"><span id="sp_attr">model:</span>  {{ object.model }}</li>
+                                        <li id="user_info_attr"><span id="sp_attr">year_of_production:</span>  {{ object.year_of_production }}</li>
+                                        <li id="user_info_attr"><span id="sp_attr">engine_capacity:</span>  {{ object.engine_capacity }}</li>
+                                        <li id="user_info_attr"><span id="sp_attr">transmission:</span>  {{ object.transmission }}</li>
+                                        <li id="user_info_attr"><span id="sp_attr">km:</span>  {{ object.km }}</li>
+                                        <li id="user_info_attr"><span id="sp_attr">color:</span>  {{ object.color }}</li>
+                                        <li id="user_info_attr"><span id="sp_attr">price:</span>  {{ object.price }}</li>
+                                        <li id="user_info_attr"><span id="sp_attr">fuel_type:</span>  {{ object.fuel_type }}</li>
+                                        <li id="user_info_attr"><span id="sp_attr">doors:</span>  {{ object.doors }}</li>
+                                        <li id="user_info_attr"><span id="sp_attr">details:</span>  <p>{{ object.details|safe}}</p></li>
+
+                                    </ul>
+
+                                </div>
+
+                            </div>
+                        </article>
+
+                    </div>
+
+                </div>
+                {% include 'user_nav.html' %}
+                <!--col-right sidebar-->
+
+            </div>
+
+            <!--row-->
+        </div>
+    </section>
+
+    {% include 'footer.html' %}
+</div>
+{% include 'footer2.html' %}
+</body>
+</html>

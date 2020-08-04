@@ -1,0 +1,81 @@
+{% load static %}
+<html lang="en">
+<head>
+    <title>my ads</title>
+</head>
+
+<body>
+<div id="page">
+    {% include 'header.html' %}
+    <section class="main-container col2-left-layout bounceInUp animated">
+        <div class="container">
+            <div class="row">
+                <div class="col-main col-sm-9 col-sm-push-3 product-grid">
+                    <div class="pro-coloumn">
+                        <article class="col-main">
+                            <div class="toolbar">
+                                <div class="sorter">
+                                   <h3 style="margin-bottom: 0;margin-top: 0"> My Ads</h3>
+                                </div>
+                            </div>
+                            <div class="category-products"> <!-- main right-->
+                                <div class="">
+                                    <div id="hot_deals" class="product-flexslider hidden-buttons">
+                                        <div class="slider-items slider-width-col4 products-grid">
+                                            <!--Item start-->
+                                            {% for rs in ads %}
+                                                <div class="item">
+                                                    <div class="item-inner">
+                                                        <div class="item-img">
+                                                            <div class="item-img-info"><a
+                                                                    href="/user/ads/{{rs.slug}}"
+                                                                    title="Retis lapen casen" class="product-image"><img
+                                                                    src="{{ rs.photo.url }}"
+                                                                    alt="Retis lapen casen"></a>
+                                                                <div class="new-label new-top-left">{{ rs.state }}</div>
+                                                                <div class="sale-label sale-top-left">-15%</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="item-info">
+                                                            <div class="info-inner">
+                                                                <div class="item-title"><a
+                                                                        href="/user/ads/{{rs.slug}}"
+                                                                        title="Retis lapen casen">{{ rs.title }}</a>
+                                                                </div>
+                                                                <div class="item-content">
+
+                                                                    <div class="item-price">
+                                                                        <div class="price-box"><span
+                                                                                class="regular-price"><span
+                                                                                class="price">${{ rs.price }}</span> </span>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            {% endfor %}
+                                            <!--Item END-->
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+                {% include 'user_nav.html' %}
+                <!--col-right sidebar-->
+            </div>
+            <!--row-->
+        </div>
+    </section>
+
+    {% include 'footer.html' %}
+</div>
+{% include 'footer2.html' %}
+</body>
+</html>

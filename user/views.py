@@ -1,11 +1,15 @@
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
-from cars.models import Category
+from cars.models import Category, Car
 from user.forms import UserUpdateForm, ProfileUpdateForm
 from user.models import UserProfile
+from django.views.generic import ListView, DetailView, CreateView
+from .forms import CarModelForm
+
 
 
 def index(request):
@@ -53,4 +57,43 @@ def user_password(request):
         form = PasswordChangeForm(request.user)
         return render(request, 'user_password.html', {'form': form,'category': category
                        })
+
+
+
+class VehicleListView(ListView):
+    template_name = 'user_ads.html'
+    context_object_name = 'ads'
+
+    def get_queryset(self):
+        return Car.objects.order_by('-create_at')
+
+    def get_context_data(self, **kwargs):
+        context = super(VehicleListView, self).get_context_data(**kwargs)
+        context['category'] = Category.objects.all()
+        return context
+
+class VehicleDetailView(DetailView):
+    model = Car
+    template_name = 'user_ads_details.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(VehicleDetailView, self).get_context_data(**kwargs)
+        context['category'] = Category.objects.all()
+        return context
+
+
+class VehicleCreateView(LoginRequiredMixin,CreateView):
+    template_name = 'car_form.html'
+    form_class = CarModelForm
+    queryset = Car.objects.all()
+
+    def get_context_data(self, **kwargs):
+        context = super(VehicleCreateView, self).get_context_data(**kwargs)
+        context['category'] = Category.objects.all()
+        return context
+
+
+
+
+
 

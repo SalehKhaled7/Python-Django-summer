@@ -53,7 +53,7 @@ class Category(MPTTModel):
 
 class Car(models.Model):
     Status = (
-        ('new', 'Yes'),
+        ('new', 'YES'),
         ('False', 'NO'),
     )
     TRANSMISSION = (
@@ -66,11 +66,11 @@ class Car(models.Model):
     )
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     title = models.CharField(max_length=30)
-    keywords = models.CharField(max_length=255)
-    description = models.CharField(max_length=255)
-    slug = models.SlugField(null=False,unique=True)
-    status = models.CharField(max_length=10, choices=Status)
-    photo = models.ImageField(blank=True, upload_to='images/')
+    keywords = models.CharField(max_length=255,blank=True)
+    description = models.CharField(max_length=255,blank=True)
+    slug = models.SlugField(null=False,unique=True,blank=True)
+    status = models.CharField(max_length=10, choices=Status ,default='YES')
+    photo = models.ImageField(blank=True, upload_to='images/',default='images/default_car.jpg')
     manufacturer = models.CharField(max_length=30)
     model = models.CharField(max_length=30)
     year_of_production = models.IntegerField('year', choices=year_choices(), default=current_year())
@@ -78,10 +78,8 @@ class Car(models.Model):
     transmission = models.CharField(max_length=10, choices=TRANSMISSION)
     km = models.IntegerField()
     state = models.CharField(max_length=10, choices=STATE)
-    color = models.CharField(max_length=30)
     price = models.FloatField(max_length=30)
     fuel_type = models.CharField(max_length=30)
-    doors = models.IntegerField()
     details = RichTextUploadingField(blank=True)
     create_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
@@ -95,7 +93,7 @@ class Car(models.Model):
     image_tag.short_description = 'Image'
 
     def get_absolute_url(self):
-        return reverse('car_detail', kwargs={'slug':self.slug})
+        return reverse('VehicleDetailView', kwargs={'slug':self.slug})
 
 
 class Image(models.Model):

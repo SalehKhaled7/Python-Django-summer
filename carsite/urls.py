@@ -21,6 +21,7 @@ from django.contrib import admin
 from django.urls import path, include
 
 from home import views
+from user.views import VehicleDetailView
 
 urlpatterns = [
     path('', include('home.urls')),
@@ -33,6 +34,7 @@ urlpatterns = [
     path('buy/', views.buy_a_car, name='cars'),
     path('buy/<int:id>/<slug:slug>', views.buy_a_car, name='buy_a_car'),
     path('car/<int:id>/<slug:slug>', views.car_details, name='car_details'),
+    path('ads/<slug>/', VehicleDetailView.as_view(), name='VehicleDetailView'),
     path('search/', views.car_search, name='car_search'),
     path('search_auto/',views.car_search_auto, name='car_search_auto'),
     path('logout/',views.logout_view, name='logout_view'),

@@ -1,28 +1,149 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>user panel</title>
+    <style>
+        #profile_pic_div{
+            height: auto;
+            float: left;
+            width: 25%;
+            text-align: center;
+        }
+
+        #profile_pic {
+            padding: 20px;
+            width: 100%;
+
+            height: auto;
+        }
+        .ads_btn{
+            color:white;
+            background-color: #6dbe14;
+            padding: 8px 30px 8px 30px;
+        }
+         .ads_btn:hover{
+             color: white;
+             font-size: 15px;
+            padding: 9px 31px 9px 31px;
+        }
+        #user-info{
+            display: flex;
+        }
+         #user-info li {
+             padding-top: 10px;
+            background-color: #2c92de;
+        }
+        .side-nav-categories #line {
+            border-top: 1px solid gray;
+            width: 100%;
+            padding-left: -25px;
+        }
+        #user_info_name{
+              color:#2D3D4C;
+            font-size: 35px;
+            padding-bottom: 20px;
+
+
+        }
+        #user_info_attr{
+            color: #3D4C4F;
+            font-size: 15px;
+            padding-top: 10px;
+        }
+        .nav_div{
+            margin-top: 37px;
+            text-align: center;
+            height:auto;
+            padding-bottom: 37px;
+        }
+        #user_nav li{
+            padding-top: 10px;
+            padding-bottom: 10px;
+            color: #0a0a0a;
+
+
+
+        }
+        #sp_attr{
+            color: #3C5B9B;
+            font-weight: bold;
+            font-size: 15px;
+        }
+
+        #user_nav li:hover {
+            font-size: 17px;
+            color: #2ecc71;
+
+        }
+         #user_nav li:active {
+
+            color: #2ecc71;
+
+        }
+        .box-content{
+            float: right;
+            width: 75%;
+
+        }
+        .right-1{
+            padding-top: 15px;
+            height: 15%;
+        }
+        .btn1{
+            text-align: center;
+            padding: 5px 5px 5px 5px;
+            margin-left: 10px;
+            background-color:#6dbe14;
+            width: 20%;
+            float: left;
+        }
+        .btn2{
+            text-align: center;
+            padding: 5px 5px 5px 5px;
+             margin-left: 10px;
+            background-color: #6dbe14;
+            width: 20%;
+            float: left;
+        }
+        .right-1 a {
+            color: white;
+        }
+
+
+    </style>
+   {% include 'head.html' %}
+</head>
+
+<body>
 <aside class="col-left sidebar col-sm-3 col-xs-12 col-sm-pull-9 wow bounceInUp animated">
-                    <div class="side-nav-categories">
+    <div class="side-nav-categories">
 
 
+        <div class="nav_div">
+            <h4 style="color: #6dbe14">User Navigation</h4>
+            <hr style="width: 60%">
+            <ul id="user_nav">
+                <a href="/user">
+                    <li>my info</li>
+                </a>
+                <a href="/user">
+                    <li>messages</li>
+                </a>
+                <a href="/user/ads">
+                    <li>my ads</li>
+                </a>
+                <a href="/user">
+                    <li>favorite</li>
+                </a>
+                <hr style="width: 60%">
+                <a href="/logout">
+                    <li>logout</li>
+                </a>
+            </ul>
+        </div>
+    </div>
 
-
-                        <div class="midd">
-                            <ul id="user_nav">
-                                <a href="/user">
-                                    <li>my info</li>
-                                </a>
-                                <a href="/user">
-                                    <li>messages</li>
-                                </a>
-                                <a href="/user">
-                                    <li>my ads</li>
-                                </a>
-                                <a href="/user">
-                                    <li>favorite</li>
-                                </a>
-                                 <a href="/logout">
-                                    <li>logout</li>
-                                </a>
-                            </ul>
-                        </div>
-                    </div>
-
-                </aside>
+</aside>
+</body>
+</html>

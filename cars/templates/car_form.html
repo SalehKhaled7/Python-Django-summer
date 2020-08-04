@@ -1,4 +1,5 @@
 {% load static %}
+{% load crispy_forms_tags %}
 <html lang="en">
 <head>
     <title>user panel</title>
@@ -15,37 +16,24 @@
                         <article class="col-main">
                             <div class="toolbar">
                                 <div class="sorter">
-                                   <h3 style="margin-bottom: 0;margin-top: 0"> password reset</h3>
+                                   <h3 style="margin-bottom: 0;margin-top: 0"> make new ad</h3>
                                 </div>
                             </div>
                             <div class="category-products"> <!-- main right-->
 
 
                                 <div class="box-content box-category">
-
-
-
-                    <form method="post">
-                        {% csrf_token %}
-                        {% for field in form %}
-                            <p>
-                                {{ field.label_tag }}<br>
-                                {{ field }}
-                                {% if field.help_text %}
-                                    <small style="color: grey">{{ field.help_text }}</small>
-                                {% endif %}
-                                {% for error in field.errors %}
-                                    <p style="color: red">{{ error }}</p>
-                                {% endfor %}
-                            </p>
-                        {% endfor %}
-                        <button class="primary-btn" type="submit">Save changes</button>
-                    </form>
-
-
+                                    <div class="box-content box-category">
+                                        <form method="post">
+                                            {% csrf_token %}
+                                            {{ form.as_p|safe }}
+                                            <input type="submit" value="Save">
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </article>
+
                     </div>
                 </div>
                 {% include 'user_nav.html' %}

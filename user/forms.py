@@ -3,6 +3,7 @@ from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth.models import User
 from django.forms import TextInput, EmailInput, Select, FileInput
 
+from cars.models import Car
 from user.models import UserProfile
 
 
@@ -38,3 +39,11 @@ class ProfileUpdateForm(forms.ModelForm):
                    'city': TextInput(attrs={'class': 'input', 'placeholder': 'city'},),
                    'country': TextInput(attrs={'class': 'input', 'placeholder': 'country'}),
                    'image': FileInput(attrs={'class': 'input', 'placeholder': 'image', }), }
+
+
+class CarModelForm(forms.ModelForm):
+    class Meta:
+        model = Car
+        fields = ['category', 'title','slug',
+              'photo','manufacturer','model','year_of_production','engine_capacity','transmission','km','state','price','fuel_type',]
+

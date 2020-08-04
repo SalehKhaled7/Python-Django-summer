@@ -2,79 +2,7 @@
 <html lang="en">
 <head>
     <title>user panel</title>
-    <style>
-        #profile_pic_div{
-            height: auto;
-        }
 
-        #profile_pic {
-
-            float: left;
-            padding: 20px;
-            width: 25%;
-            height: auto;
-        }
-        #user-info{
-            display: flex;
-        }
-         #user-info li {
-             padding-top: 10px;
-            background-color: #2c92de;
-        }
-        .side-nav-categories #line {
-            border-top: 1px solid gray;
-            width: 100%;
-            padding-left: -25px;
-        }
-        #user_info_name{
-              color:#2D3D4C;
-            font-size: 35px;
-            padding-bottom: 20px;
-
-
-        }
-        #user_info_attr{
-            color: #3D4C4F;
-
-            font-size: 15px;
-            padding-top: 10px;
-        }
-        .midd{
-            text-align: center;
-        }
-        #user_nav li{
-            padding-top: 10px;
-            padding-bottom: 10px;
-            color: white;
-            background-color:#2e6da4;
-
-
-        }
-        #sp_attr{
-            color: #3C5B9B;
-            font-weight: bold;
-            font-size: 15px;
-        }
-
-        #user_nav li:hover {
-            background-color: #3D4C4F;
-            color: #2ecc71;
-
-        }
-         #user_nav li:active {
-            background-color: #3D4C4F;
-            color: #2ecc71;
-
-        }
-        .box-content{
-            margin-top: 50px;
-            float: right;
-            width: 75%;
-
-        }
-
-    </style>
-    {% include 'head.html' %}
 </head>
 
 <body>
@@ -104,6 +32,10 @@
 
                                 <div id="profile_pic_div"><img id="profile_pic" src="{{ profile.image.url }}"/></div>
                                 <div class="box-content box-category">
+                                     <div class="right-1">
+                                        <div class="btn1" ><a href="/user/update/">update info</a></div>
+                                        <div class="btn2"><a href="/user/password/">change password</a></div>
+                                    </div>
 
                                     <ul id="user_info">
                                         <li id="user_info_name"><span
@@ -114,8 +46,7 @@
                                         <li id="user_info_attr"><span id="sp_attr">Country:</span>  {{ profile.country }}</li>
                                         <li id="user_info_attr"><span id="sp_attr">City:</span>  {{ profile.city }}</li>
                                         <li id="user_info_attr"><span id="sp_attr">Address:</span>  {{ profile.address }}</li>
-                                        <li ><a href="/user/update/">update info</a></li>
-                                        <li ><a href="/user/password/">change password</a></li>
+
                                     </ul>
 
                                 </div>
