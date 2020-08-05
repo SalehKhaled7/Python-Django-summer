@@ -24,7 +24,8 @@
 
                                 <div id="profile_pic_div">
                                     <div><img id="profile_pic" src="{{ object.photo.url }}"/></div>
-                                    <div><a href="#" class="ads_btn">update</a></div>
+                                    <div><a href="update/" class="ads_btn">update</a></div>
+                                    <div><a href="delete/" class="ads_btn">delete</a></div>
                                 </div>
                                 <div class="box-content box-category">
 
@@ -34,8 +35,6 @@
                                                 >{{ object.title }}</span>
                                         </li>
                                         <li id="user_info_attr"><span id="sp_attr">category:</span>  {{ object.category }}</li>
-                                        <li id="user_info_attr"><span id="sp_attr">keywords:</span> {{ object.keywords }}</li>
-                                        <li id="user_info_attr"><span id="sp_attr">description:</span>  {{ object.description }}</li>
                                         <li id="user_info_attr"><span id="sp_attr">slug:</span>  {{ object.slug }}</li>
                                         <li id="user_info_attr"><span id="sp_attr">manufacturer:</span>  {{ object.manufacturer }}</li>
                                         <li id="user_info_attr"><span id="sp_attr">model:</span>  {{ object.model }}</li>
@@ -43,10 +42,8 @@
                                         <li id="user_info_attr"><span id="sp_attr">engine_capacity:</span>  {{ object.engine_capacity }}</li>
                                         <li id="user_info_attr"><span id="sp_attr">transmission:</span>  {{ object.transmission }}</li>
                                         <li id="user_info_attr"><span id="sp_attr">km:</span>  {{ object.km }}</li>
-                                        <li id="user_info_attr"><span id="sp_attr">color:</span>  {{ object.color }}</li>
                                         <li id="user_info_attr"><span id="sp_attr">price:</span>  {{ object.price }}</li>
                                         <li id="user_info_attr"><span id="sp_attr">fuel_type:</span>  {{ object.fuel_type }}</li>
-                                        <li id="user_info_attr"><span id="sp_attr">doors:</span>  {{ object.doors }}</li>
                                         <li id="user_info_attr"><span id="sp_attr">details:</span>  <p>{{ object.details|safe}}</p></li>
 
                                     </ul>

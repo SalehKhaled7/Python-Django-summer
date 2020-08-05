@@ -15,25 +15,27 @@
                         <article class="col-main">
                             <div class="toolbar">
                                 <div class="sorter">
-                                   <h3 style="margin-bottom: 0;margin-top: 0"> My Ads</h3>
+                                   <h3 style="margin-bottom: 0;margin-top: 0"> My Adss</h3>
                                 </div>
                             </div>
                             <div class="category-products"> <!-- main right-->
                                 <div class="">
                                     <div id="hot_deals" class="product-flexslider hidden-buttons">
+                                    <div><a href="/user/new/ad" class="ads_btn">new</a></div>
                                         <div class="slider-items slider-width-col4 products-grid">
                                             <!--Item start-->
                                             {% for rs in ads %}
+
+
                                                 <div class="item">
                                                     <div class="item-inner">
                                                         <div class="item-img">
                                                             <div class="item-img-info"><a
-                                                                    href="/user/ads/{{rs.slug}}"
+                                                                    href="/user/ads/{{rs.pk}}"
                                                                     title="Retis lapen casen" class="product-image"><img
                                                                     src="{{ rs.photo.url }}"
                                                                     alt="Retis lapen casen"></a>
-                                                                <div class="new-label new-top-left">{{ rs.state }}</div>
-                                                                <div class="sale-label sale-top-left">-15%</div>
+
                                                             </div>
                                                         </div>
                                                         <div class="item-info">
@@ -47,7 +49,7 @@
                                                                     <div class="item-price">
                                                                         <div class="price-box"><span
                                                                                 class="regular-price"><span
-                                                                                class="price">${{ rs.price }}</span> </span>
+                                                                                class="price">${{ rs.price }}{{ rs.user }}</span> </span>
                                                                         </div>
                                                                     </div>
 
@@ -57,6 +59,7 @@
                                                     </div>
                                                 </div>
                                             {% endfor %}
+
                                             <!--Item END-->
                                         </div>
                                     </div>

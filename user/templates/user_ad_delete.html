@@ -1,0 +1,45 @@
+{% load static %}
+<html lang="en">
+<head>
+    <title>user panel</title>
+</head>
+
+<body>
+<div id="page">
+    {% include 'header.html' %}
+    <section class="main-container col2-left-layout bounceInUp animated">
+        <div class="container">
+            <div class="row">
+                <div class="col-main col-sm-9 col-sm-push-3 product-grid">
+                    <div class="pro-coloumn">
+                        <article class="col-main">
+                            <div class="toolbar">
+                                <div class="sorter">
+                                    <h3 style="margin-bottom: 0;margin-top: 0"> add delete</h3>
+                                </div>
+                            </div>
+                            <div class="category-products"> <!-- main right-->
+                                <div class="box-content box-category">
+                                    <p><h3>are u sure that u want to delete : {{ ad.title }}</h3></p>
+                                    <form action="/user/ads/{{ ad.id }}/delete/" method="post">
+                                        {% csrf_token %}
+                                        <a href="/user/ads">Cancel</a>
+                                        <input type="submit" name="Confirm" value="Confirm">
+                                    </form>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+                {% include 'user_nav.html' %}
+                <!--col-right sidebar-->
+            </div>
+            <!--row-->
+        </div>
+    </section>
+
+    {% include 'footer.html' %}
+</div>
+{% include 'footer2.html' %}
+</body>
+</html>

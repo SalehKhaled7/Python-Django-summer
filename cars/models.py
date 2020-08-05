@@ -6,6 +6,7 @@ from django.urls import reverse
 from django.utils.safestring import mark_safe
 from mptt.fields import TreeForeignKey
 from mptt.models import MPTTModel
+from django.conf import  settings
 
 
 def year_choices():
@@ -64,6 +65,7 @@ class Car(models.Model):
         ('new', 'NEW'),
         ('used', 'USED'),
     )
+    owner = models.ForeignKey(User,on_delete=models.CASCADE)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     title = models.CharField(max_length=30)
     keywords = models.CharField(max_length=255,blank=True)

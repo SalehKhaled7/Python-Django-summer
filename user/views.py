@@ -1,13 +1,12 @@
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from cars.models import Category, Car
 from user.forms import UserUpdateForm, ProfileUpdateForm
 from user.models import UserProfile
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import DetailView
 from .forms import CarModelForm
 
 
@@ -60,17 +59,6 @@ def user_password(request):
 
 
 
-class VehicleListView(ListView):
-    template_name = 'user_ads.html'
-    context_object_name = 'ads'
-
-    def get_queryset(self):
-        return Car.objects.order_by('-create_at')
-
-    def get_context_data(self, **kwargs):
-        context = super(VehicleListView, self).get_context_data(**kwargs)
-        context['category'] = Category.objects.all()
-        return context
 
 class VehicleDetailView(DetailView):
     model = Car
@@ -82,16 +70,60 @@ class VehicleDetailView(DetailView):
         return context
 
 
-class VehicleCreateView(LoginRequiredMixin,CreateView):
-    template_name = 'car_form.html'
-    form_class = CarModelForm
-    queryset = Car.objects.all()
+def user_new_ad(request):
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect("/login/")
 
-    def get_context_data(self, **kwargs):
-        context = super(VehicleCreateView, self).get_context_data(**kwargs)
-        context['category'] = Category.objects.all()
-        return context
+    if request.method == 'POST':
+        form = CarModelForm(request.POST,request.FILES)
+        if form.is_valid():
+            ad = form.save(commit=False)
+            ad.owner = request.user
+            ad.save()
+            return HttpResponseRedirect('/user/ads')
 
+    else:
+        form = CarModelForm()
+    category = Category.objects.all()
+    context = {'form': form,
+               'category': category, }
+    return render(request, 'new_ad.html', context)
+
+
+def user_ads(request):
+    ads = Car.objects.filter(owner=request.user)
+    category = Category.objects.all()
+    context = {'ads': ads,
+               'category': category, }
+    return render(request, 'user_ads.html', context)
+
+
+def user_ad_update(request,pk):
+    ad = Car.objects.get(id=pk)
+    form = CarModelForm(instance=ad)
+    if request.method == 'POST':
+        form = CarModelForm(request.POST,request.FILES,instance=ad)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/user/ads/'+pk)
+    category = Category.objects.all()
+    context = {
+        'category': category,
+        'form': form,
+    }
+    return render(request, 'user_ad_update.html', context)
+
+
+def user_ad_delete(request,pk):
+    ad = Car.objects.get(id=pk)
+
+    if request.method == "POST":
+        ad.delete()
+        return HttpResponseRedirect('/user/ads/')
+    category = Category.objects.all()
+    context = {'category': category,
+               'ad': ad,}
+    return render(request,'user_ad_delete.html',context)
 
 
 
