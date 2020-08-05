@@ -1,0 +1,45 @@
+{% load static %}
+<html lang="en">
+   <head>
+    <title>faqs</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+       <script>
+        $( function() {
+            $( "#accordion" ).accordion();
+        } );
+    </script>
+    {% include 'head.html' %}
+       <style>
+           #accordion{
+               padding: 20px 75px 20px 75px ;
+
+
+           }
+       </style>
+</head>
+<body>
+
+    {% include 'header.html'%}
+
+        <div class="account-login container">
+        <div class="text-center" style="padding-top: 20px"><h1>FAQS</h1></div>
+
+             <div id="accordion">
+                    {% for rs in faq %}
+                        <h2>{{ rs.question }}</h2>
+                        <div>
+                            <p>
+                                {{ rs.answer | safe }}
+                            </p>
+                        </div>
+                    {% endfor %}
+                </div>
+
+        </div>
+
+{% include 'footer.html'%}
+
+{% include 'footer2.html'%}
+</body>
+</html>

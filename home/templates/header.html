@@ -116,16 +116,13 @@
                         <!--level0-wrapper dropdown-6col-->
                         <!--mega menu-->
                       </li>
-                      <li class="level0 parent drop-menu"> <a class="level-top" href="#"><span>sell your vehicle‎</span></a>
-                        <ul class="level1">
-                          <li class="level1 first"><a href="grid.html"><span>Car Grid</span></a></li>
-                          <li class="level1 nav-10-2"> <a href="list.html"> <span>Car List</span> </a> </li>
-                          <li class="level1 nav-10-3"> <a href="grid1.html"> <span>Accessories Grid</span> </a> </li>
-                          <li class="level1 nav-10-4"> <a href="list1.html"> <span>Accessories List</span> </a> </li>
-                          <li class="level1 first parent"><a href="car-detail.html"><span>Car Detail</span></a> </li>
-                          <li class="level1 first parent"><a href="accessories-detail.html"><span>Accessories Detail</span></a> </li>
-                        </ul>
-                      </li>
+                      <li class="level0 parent drop-menu">
+                           {% if user.is_authenticated %}
+                          <a class="level-top" href="/user/new/ad/">
+                              {% else %}
+                               <a class="level-top" href="/login">
+                              {% endif %}
+                              <span>sell your vehicle‎</span></a></li>
                       <li class="level0 parent drop-menu"> <a class="level-top" href="/aboutus/"><span>about us</span></a></li>
                       <li class="mega-menu hidden-sm"> <a class="level-top" href="/contact/"><span>contact us‎</span></a> </li>
                       <li class="level0 parent drop-menu"><a href="#"><span>Pages</span> </a>
@@ -151,34 +148,7 @@
                           <li class="level1"><a href="newsletter.html"><span>Newsletter</span></a> </li>
                         </ul>
                       </li>
-                      <li class="fl-custom-tabmenulink mega-menu"> <a href="#" class="level-top"> <span>Custom</span> </a>
-                        <div class="level0-wrapper fl-custom-tabmenu" style="left: 0px; display: none;">
-                          <div class="container">
-                            <div class="header-nav-dropdown-wrapper clearer">
-                              <div class="grid12-3">
-                                <div><img src="{%static 'images/custom-img1.jpg'%}" alt="custom-image"></div>
-                                <h4 class="heading">SALE UP TO 30% OFF</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                              </div>
-                              <div class="grid12-3">
-                                <div><img src="{%static 'images/custom-img2.jpg'%}" alt="custom-image"></div>
-                                <h4 class="heading">SALE UP TO 30% OFF</h4>
-                                <p>Sed et quam lacus. Fusce condimentum eleifend enim a feugiat.</p>
-                              </div>
-                              <div class="grid12-3">
-                                <div><img src="{%static 'images/custom-img3.jpg'%}" alt="custom-image"></div>
-                                <h4 class="heading">SALE UP TO 30% OFF</h4>
-                                <p>Sed et quam lacus. Fusce condimentum eleifend enim a feugiat.</p>
-                              </div>
-                              <div class="grid12-3">
-                                <div><img src="{%static 'images/custom-img4.jpg'%}" alt="custom-image"></div>
-                                <h4 class="heading">SALE UP TO 30% OFF</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </li>
+                      <li class="level1"> <a href="/faq/" > <span>FAQ</span> </a></li>
                     </ul>
                     <!--nav-->
                   </div>

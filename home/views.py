@@ -5,7 +5,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
 from cars.models import Car, Category, Image
 from home.forms import SearchForm
-from home.models import Setting, ContactForm, ContactFormMessage
+from home.models import Setting, ContactForm, ContactFormMessage, FAQ
 from user.forms import SignUpForm
 from user.models import UserProfile
 
@@ -143,6 +143,16 @@ def signup_view(request):
     context = {'category': category,
                'form': form, }
     return render(request, 'signup.html', context)
+
+
+def faq(request):
+    faq = FAQ.objects.filter(status="True").order_by("question_num")
+    category = Category.objects.all()
+    context = {'category': category,
+               'faq': faq, }
+    return render(request, 'faq.html', context)
+
+
 
 
 

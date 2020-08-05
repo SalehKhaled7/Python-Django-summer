@@ -69,4 +69,17 @@ class ContactForm(ModelForm):
             'message': Textarea(attrs={'class': 'input', 'rows': '5'}),
         }
 
+class FAQ(models.Model):
+    STATUS = (
+        ('True', 'True'),
+        ('False', 'False'),
+    )
+    question_num=models.IntegerField(default=0)
+    question = models.CharField(max_length=250)
+    answer = RichTextUploadingField()
+    status=models.CharField(max_length=15,choices=STATUS)
+    create_at=models.DateTimeField(auto_now_add=True)
+    update_at=models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return self.question
