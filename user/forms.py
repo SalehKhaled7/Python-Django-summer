@@ -48,9 +48,5 @@ class CarModelForm(forms.ModelForm):
               'photo','manufacturer','model','year_of_production',
                   'engine_capacity','transmission','km','state','price','fuel_type',]
 
-class AdImageForm(forms.ModelForm):
-    class Meta:
-        model = Image
-        fields =['title','image']
 
 

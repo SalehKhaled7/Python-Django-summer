@@ -26,7 +26,10 @@
                                         {% csrf_token %}
                                         <fieldset class="form-group">
                                             {{ form.as_p }}
-                                         {{ ad_images_form.as_p }}
+                                         {{ formset.management_form }}
+                                            {% for f in formset %}
+                                                {{ f.as_p }}
+                                            {% endfor %}
                                         </fieldset>
                                         <div class="form-group">
                                             <button class="primary-btn" type="submit">Update</button>

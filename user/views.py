@@ -1,11 +1,11 @@
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
-from django.forms import formset_factory
-from django.http import HttpResponseRedirect
+from django.forms import formset_factory, modelformset_factory
+from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import render
 from cars.models import Category, Car, Image
-from user.forms import UserUpdateForm, ProfileUpdateForm, AdImageForm
+from user.forms import UserUpdateForm, ProfileUpdateForm
 from user.models import UserProfile
 from django.views.generic import DetailView
 from .forms import CarModelForm
@@ -70,10 +70,9 @@ class VehicleDetailView(DetailView):
 
 
 def user_new_ad(request):
-    image_form_set = formset_factory(AdImageForm, extra=4)
+    image_form_set = modelformset_factory(Image,fields=('title','image'), extra=4)
     if not request.user.is_authenticated:
         return HttpResponseRedirect("/login/")
-
     if request.method == 'POST':
         form = CarModelForm(request.POST, request.FILES)
         formset = image_form_set(request.POST or None, request.FILES)
@@ -90,7 +89,7 @@ def user_new_ad(request):
             return HttpResponseRedirect('/user/ads')
     else:
         form = CarModelForm()
-        formset = image_form_set()
+        formset = image_form_set(queryset=Image.objects.filter(cars=request.user.id))
     category = Category.objects.all()
     context = {'form': form,
                'category': category,
@@ -109,20 +108,31 @@ def user_ads(request):
 def user_ad_update(request, pk):
     ad = Car.objects.get(id=pk)
     form = CarModelForm(instance=ad)
-    ad_images_form = AdImageForm
+    image_form_set = modelformset_factory(Image,fields=('title','image'), extra=4)
+    if ad.owner != request.user:
+        raise Http404
     if request.method == 'POST':
         form = CarModelForm(request.POST, request.FILES, instance=ad)
-        ad_images_form = AdImageForm(request.POST, request.FILES)
-        if form.is_valid() and ad_images_form.is_valid():
-            form.save()
-            ad_images_form.save()
+        formset = image_form_set(request.POST or None, request.FILES)
+        if form.is_valid() and formset.is_valid():
+            ad = form.save(commit=False)
+            ad.owner = request.user
+            ad.save()
+            for f in formset:
+                try:
+                    img = Image(cars=ad, image=f.cleaned_data['image'], title=f.cleaned_data['title'])
+                    img.save()
+                except Exception as e:
+                    break
             return HttpResponseRedirect('/user/ads/' + pk)
-    category = Category.objects.all()
-    context = {
-        'category': category,
-        'form': form,
-        'ad_images_form': ad_images_form,
-    }
+    else:
+        formset = image_form_set(queryset=Image.objects.filter(cars=ad))
+        category = Category.objects.all()
+        context = {
+            'category': category,
+            'form': form,
+            'formset': formset,
+        }
     return render(request, 'user_ad_update.html', context)
 
 

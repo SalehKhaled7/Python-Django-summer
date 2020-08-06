@@ -24,8 +24,10 @@
 
                                 <div id="profile_pic_div">
                                     <div><img id="profile_pic" src="{{ object.photo.url }}"/></div>
+                                    {% if object.owner == request.user %}
                                     <div><a href="update/" class="ads_btn">update</a></div>
                                     <div><a href="delete/" class="ads_btn">delete</a></div>
+                                    {% endif %}
                                 </div>
                                 <div class="box-content box-category">
 
