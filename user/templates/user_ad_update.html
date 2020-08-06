@@ -1,7 +1,7 @@
 {% load static %}
 <html lang="en">
 <head>
-    <title>user update info</title>
+    <title>user ad update</title>
 </head>
 
 <body>
@@ -26,6 +26,7 @@
                                         {% csrf_token %}
                                         <fieldset class="form-group">
                                             {{ form.as_p }}
+                                         {{ ad_images_form.as_p }}
                                         </fieldset>
                                         <div class="form-group">
                                             <button class="primary-btn" type="submit">Update</button>

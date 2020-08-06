@@ -51,5 +51,6 @@ class CarModelForm(forms.ModelForm):
 class AdImageForm(forms.ModelForm):
     class Meta:
         model = Image
-        fields =['image']
+        fields =['title','image']
+
 

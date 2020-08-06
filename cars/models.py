@@ -101,7 +101,7 @@ class Car(models.Model):
 class Image(models.Model):
     cars = models.ForeignKey(Car, on_delete=models.CASCADE)
     title = models.CharField(max_length=30)
-    image = models.ImageField(blank=True, upload_to='images/')
+    image = models.ImageField(blank=True, upload_to='images/',null=True)
 
     def __str__(self):
         return self.title
