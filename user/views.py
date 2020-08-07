@@ -1,10 +1,11 @@
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
-from django.forms import formset_factory, modelformset_factory
+from django.forms import  modelformset_factory
 from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import render
 from cars.models import Category, Car, Image
+from home.models import ContactFormMessage
 from user.forms import UserUpdateForm, ProfileUpdateForm
 from user.models import UserProfile
 from django.views.generic import DetailView
@@ -32,8 +33,7 @@ def user_update(request):
     else:
         category = Category.objects.all()
         user_form = UserUpdateForm(instance=request.user)
-        profile_form = ProfileUpdateForm(
-            instance=request.user.userprofile)  # "userprofile" model -> OneToOneField relations with user
+        profile_form = ProfileUpdateForm(instance=request.user.userprofile)  # "userprofile" model -> OneToOneField relations with user
         context = {
             'category': category,
             'user_form': user_form,
@@ -107,7 +107,6 @@ def user_ads(request):
 
 def user_ad_update(request, pk):
     ad = Car.objects.get(id=pk)
-    form = CarModelForm(instance=ad)
     image_form_set = modelformset_factory(Image,fields=('title','image'), extra=4)
     if ad.owner != request.user:
         raise Http404
@@ -124,8 +123,10 @@ def user_ad_update(request, pk):
                     img.save()
                 except Exception as e:
                     break
-            return HttpResponseRedirect('/user/ads/' + pk)
+            return HttpResponseRedirect('/user/ads/'+pk)
+        return HttpResponseRedirect('/user/ads/' + pk)
     else:
+        form = CarModelForm(instance=ad)
         formset = image_form_set(queryset=Image.objects.filter(cars=ad))
         category = Category.objects.all()
         context = {
@@ -133,7 +134,8 @@ def user_ad_update(request, pk):
             'form': form,
             'formset': formset,
         }
-    return render(request, 'user_ad_update.html', context)
+        return render(request,'user_ad_update.html',context)
+
 
 
 def user_ad_delete(request, pk):
@@ -146,3 +148,11 @@ def user_ad_delete(request, pk):
     context = {'category': category,
                'ad': ad, }
     return render(request, 'user_ad_delete.html', context)
+
+
+def user_msg(request):
+    messages = ContactFormMessage.objects.filter(send_to=request.user)
+    category = Category.objects.all()
+    context = {'messages': messages,
+               'category': category, }
+    return render(request, 'user_msg.html', context)

@@ -1,71 +1,75 @@
+{% extends 'homebase.html' %}
 {% load static %}
-<html lang="en">
-      <head>
-    <title>Signup CarNex</title>
-    <meta name="description" content="{{setting.description}}">
-    <meta name="keywords" content="{{setting.keywords}}">
-    {% include 'head.html' %}
-</head>
-<body>
-<div id="page">
-    {% include 'header.html'%}
 
-           <div class="main-container col1-layout wow bounceInUp animated animated" style="visibility: visible;">
+{% block title %}{{ setting.title }}{% endblock %}
+{% block description %}{{ setting.description }}{% endblock %}
+{% block keywords %}{{ setting.keywords }}{% endblock %}
 
-	       <div class="main">
-                            <div class="account-login container">
-  <!--page-title-->
+{% block sidebar %} {% endblock %}
+{% block slider %}{% endblock %}
+{% block head %}
+    <Style>
+
+        .content {
+            text-align: center;
+        }
+
+        .form-list {
+            text-align: left;
+        }
+    </Style>
+{% endblock %}
+{% block body %}
+    <div class="account-login container">
+        <!--page-title-->
         {% if messages %}
-                    {% for message in messages %}
-                        <div class="alert alert-{{ message.tags }}" role = alert">
-                            {{ message }}
-                        </div>
-                    {% endfor %}
-                {% endif %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}" role=alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
         <form action="#" method="post" id="login-form">
 
-        <fieldset class="col2-set">
-            <div class="col-1 new-users">
-                  <strong>sign up</strong>
-                <div class="content">
 
-                    <p>By making account on our website u will be abe to post your ads and recive messages from custumers </p>
-                     <div class="buttons-set">
-                         {% csrf_token %}
-                         {% for field in form %}
-                             <p>
-                                {{ field.label_tag }}<br>
-                                {{ field }}
-                                {% if field.help_text %}
-                                    <small style="color: greenyellow">{{ field.help_text }}</small>
-                                {% endif %}
-                                {% for error in field.errors %}
-                                    <p style="color: #2c92de">{{ error }}</p>
+            <fieldset class="col2-set">
+                <div class="col-1 new-users">
 
-                                {% endfor %}
+                    <img src="#"> <!-- signup page image-->
 
-
-                             </p>
-                         {% endfor %}
-
-                        <button type="submit" class="button login"  value="login" name="send" id="send2">sign up </button>
-                     </div>
                 </div>
-            </div>
+                <div class="col-2 registered-users">
+                    <strong>sign up</strong>
+                    <div class="content">
 
-        </fieldset> <!--col2-set-->
-    </form>
+                        <p>By making account on our website u will be abe to post your ads and recive
+                            messages from custumers </p>
+                        <div class="buttons-set">
+                            {% csrf_token %}
+                            <ul class="form-list">
 
-</div> <!--account-login-->
+                                {% for field in form %}
 
-	       </div><!--main-container-->
+                                    <li>
+                                        {{ field.label_tag }}
+                                        <div class="input-box"> {{ field }}</div>
+                                        {% if field.help_text %}
+                                            <small style="color:#3C5B9B">{{ field.help_text }}</small>
+                                        {% endif %}
+                                        {% for error in field.errors %}
+                                            <p style="color: #2c92de">{{ error }}</p>
+                                        {% endfor %}
 
-          </div> <!--col1-layout-->
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                            <button type="submit" class="button login" value="login" name="send"
+                                    id="send2" style="margin-top: 20px; margin-bottom: 20px">sign up
+                            </button>
+                        </div>
 
-
-
-{% include 'footer.html'%}
-</div>
-{% include 'footer2.html'%}
-</body>
-</html>
+                    </div> <!--col-2 registered-users-->
+            </fieldset> <!--col2-set-->
+        </form>
+    </div> <!--account-login-->
+{% endblock %}

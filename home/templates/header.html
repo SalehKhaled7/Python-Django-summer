@@ -1,6 +1,18 @@
 {% load static %}
 {% load mptt_tags %}
+<head>
+    <style>
+        #logo{
+            margin-top: -20px;
+            margin-left: 60px;
+        }
+        .level0-wrapper{
+            position: relative;
+            z-index: 10;
+        }
 
+    </style>
+</head>
 <header>
 <script>
 
@@ -25,7 +37,7 @@
         <div id="header">
           <div class="header-container">
             <div class="header-logo"> <a href="/home/" title="Car HTML" class="logo">
-              <img src="{%static 'images/logo.png'%}" alt="Car Store">
+              <img  id="logo" src="{%static 'images/logo.png'%}" alt="Car Store">
               </a> </div>
             <div class="header__nav">
               <div class="header-banner">
@@ -46,7 +58,7 @@
                          <a title="" class="clicker">{{ user.get_username }}</a>
                              <div class="fl-nav-links">
                                   <ul class="links">
-                                    <li><a href="/usermsg/" title="My Account">messages</a></li>
+                                    <li><a href="/user/msg" title="My Account">messages</a></li>
                                     <li><a href="/user/" title="My Account">my profile</a></li>
                                     <li><a href="/logout/" title="My Account">logout</a></li>
                                  </ul>
@@ -88,7 +100,7 @@
                                 <!--mega menu-->
                                 <ul class="level0">
                                     {% recursetree category %}
-                                  <li class="level3 nav-6-1 parent item"> <a href="/buy/{{ node.id }}/{{ node.slug }}"><span>{{ node.title }}</span></a>
+                                  <li class="level3 nav-6-1 parent item"><a href="/buy/{{ node.id }}/{{ node.slug }}"><span>{{ node.title }}</span></a>
                                     <!--sub sub category-->
                                       {% if not node.is_leaf_node %}
                                     <ul class="level1">

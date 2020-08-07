@@ -5,7 +5,7 @@ from home.models import Setting, ContactFormMessage, FAQ
 
 
 class ContactFormMessageAdmin(admin.ModelAdmin):
-    list_display = ['name','subject','message','email', 'status']
+    list_display = ['send_to','name','subject','message','email', 'status']
     list_filter = ['status']
 
 class FAQAdmin(admin.ModelAdmin):

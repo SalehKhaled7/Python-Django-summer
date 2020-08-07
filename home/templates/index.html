@@ -1,21 +1,9 @@
-{% load static %}
-<html lang="en">
-<head>
-    <title>{{ setting.title}}</title>
-    <meta name="description" content="{{setting.description}}">
-    <meta name="keywords" content="{{setting.keywords}}">
-    {% include 'head.html' %}
-</head>
+{% extends 'homebase.html' %}
 
-<body>
-<div id="page">
-    {% include 'header.html'%}
-    <div class="content">
-        {% include 'slider.html'%}
-        {% include 'content.html' %}
-    </div>
-{% include 'footer.html'%}
-</div>
-{% include 'footer2.html'%}
-</body>
-</html>
+{% block title %} {{ setting.title }} {% endblock %}
+{% block description %} {{ setting.description }} {% endblock %}
+{% block keywords %} {{ setting.keywords }} {% endblock %}
+
+{% block sidebar %}  {% endblock %}
+{% block slider %} {% include 'slider.html' %} {% endblock %}
+{% block body %} {% include 'content.html' %}  {% endblock %}

@@ -1,14 +1,14 @@
+{% extends 'homebase.html' %}
 {% load static %}
-<html lang="en">
-       <head>
-    <title>Login CarNex</title>
-    <meta name="description" content="{{setting.description}}">
-    <meta name="keywords" content="{{setting.keywords}}">
-    {% include 'head.html' %}
-</head>
-<body>
-<div id="page">
-    {% include 'header.html'%}
+
+{% block title %}Login {{ setting.title }}{% endblock %}
+{% block description %}{{ setting.description }}{% endblock %}
+{% block keywords %}{{ setting.keywords }}{% endblock %}
+
+{% block sidebar %} {% endblock %}
+{% block slider %}{% endblock %}
+{% block body %}
+
            <div class="main-container col1-layout wow bounceInUp animated animated" style="visibility: visible;">
 
 	       <div class="main">
@@ -80,8 +80,4 @@
           </div> <!--col1-layout-->
 
 
-{% include 'footer.html'%}
-</div>
-{% include 'footer2.html'%}
-</body>
-</html>
+{% endblock %}

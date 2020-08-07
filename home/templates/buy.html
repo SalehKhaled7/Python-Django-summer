@@ -1,19 +1,22 @@
+{% extends 'homebase.html' %}
 {% load static %}
-<html lang="en">
-      <head>
-    <title>buy ur vihcle</title>
-    <meta name="description" content="{{setting.description}}">
-    <meta name="keywords" content="{{setting.keywords}}">
-    {% include 'head.html' %}
-</head>
-<body>
-<div id="page">
-    {% include 'header.html'%}
-    <div class="content">
 
-<!--breadcrumbs-->
-<!-- BEGIN Main Container col2-left -->
-<section class="main-container col2-left-layout bounceInUp animated">
+{% block title %} {{ setting.title }} {% endblock %}
+{% block description %} {{ setting.description }} {% endblock %}
+{% block keywords %} {{ setting.keywords }} {% endblock %}
+{% block head %}
+    <style>
+    .section-filter{
+        position: relative;
+        z-index: 3;
+    }
+    </style>
+{% endblock %}
+
+{% block sidebar %}  {% endblock %}
+{% block slider %}  {% endblock %}
+{% block body %}
+    <section class="main-container col2-left-layout bounceInUp animated">
   <!-- For version 1, 2, 3, 8 -->
   <!-- For version 1, 2, 3 -->
   <div class="container">
@@ -465,12 +468,5 @@
   </div>
   <!--container-->
 </section>
-<!--main-container col2-left-layout-->
+{% endblock %}
 
-    </div>
-
-{% include 'footer.html'%}
-</div>
-{% include 'footer2.html'%}
-</body>
-</html>

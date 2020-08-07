@@ -1,16 +1,20 @@
+{% extends 'homebase.html' %}
 {% load static %}
-<html lang="en">
-       <head>
-    <title>{{ car.title }}</title>
-    <meta name="description" content="{{setting.description}}">
-    <meta name="keywords" content="{{setting.keywords}}">
-    {% include 'head.html' %}
-</head>
-<body>
-<div id="page">
-    {% include 'header.html'%}
-    <div class="content">
-      <!-- BEGIN Main Container -->
+{% block title %} {{ car.title }}-{{ setting.title }}{% endblock %}
+{% block description %} {{ car.description }} {% endblock %}
+{% block keywords %} {{ car.keywords }} {% endblock %}
+{% block head %}
+    <style>
+    #myDIV{
+        display: none;
+    }
+    </style>
+{% endblock %}
+
+{% block sidebar %}  {% endblock %}
+{% block slider %} {% endblock %}
+{% block body %}
+          <!-- BEGIN Main Container -->
   <div class="main-container col1-layout wow bounceInUp animated">
     <div class="main">
       <div class="col-main">
@@ -41,9 +45,22 @@
                     </div>
                   </div>
                   <!-- end: more-images -->
-                   <div class="toll-free"><a href="#"><i class="fa fa-phone"></i> +1 800 789 0000</a></div>
-                  <div class="ask-question"><a href="#" onClick="ShowMe();"><i class="fa fa-question"></i> Ask a Question</a></div>
-                  <div class="request-call"><a href="#" onClick="ShowMe1();"><i class="fa fa-money"></i> Finance Calculator</a></div>
+                   <div class="toll-free"><a><i class="fa fa-phone"></i>{{ car.owner.userprofile.phone}}</a></div>
+                  <div class="ask-question"><a href="#" onClick="myFunction()"><i class="fa fa-question"></i> Ask a Question</a></div>
+                <br>
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }}" role = alert">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+
+                        <form class="form-list" action="" method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <input type="submit" value="SEND">
+                </form>
                 </div>
                 <!--End For version 1,2,6-->
                 <!-- For version 3 -->
@@ -68,48 +85,56 @@
                   <div class="spec-row" id="summarySpecs">
                   <h2>Specifications</h2>
                     <table width="100%">
-                      <tbody>
+                        <tbody>
                         <tr>
-                          <td class="label-spec"> Mileage <span class="coln">:</span></td>
-                          <td class="value-spec"> {{ car.km}} </td>
+                            <td class="label-spec"> Owner <span class="coln">:</span></td>
+                            <td class="value-spec"> {{ car.owner }} </td>
+                        </tr>
+                         <tr>
+                            <td class="label-spec"> ad Date <span class="coln">:</span></td>
+                            <td class="value-spec"> {{ car.create_at }} </td>
                         </tr>
                         <tr>
-                          <td class="label-spec"> Engine Displ. <span class="coln">:</span></td>
-                          <td class="value-spec">{{car.engine_capacity }} </td>
+                            <td class="label-spec"> Mileage <span class="coln">:</span></td>
+                            <td class="value-spec"> {{ car.km }} </td>
+                        </tr>
+                        <tr>
+                            <td class="label-spec"> Engine Displ. <span class="coln">:</span></td>
+                            <td class="value-spec">{{ car.engine_capacity }} </td>
                         </tr>
                         <tr class="odd">
-                          <td class="label-spec"> Transmission <span class="coln">:</span></td>
-                          <td class="value-spec"> {{ car.transmission }} </td>
+                            <td class="label-spec"> Transmission <span class="coln">:</span></td>
+                            <td class="value-spec"> {{ car.transmission }} </td>
                         </tr>
                         <tr class="odd">
-                          <td class="label-spec"> Fuel Type <span class="coln">:</span></td>
-                          <td class="value-spec"> {{ car.fuel_type }} </td>
+                            <td class="label-spec"> Fuel Type <span class="coln">:</span></td>
+                            <td class="value-spec"> {{ car.fuel_type }} </td>
                         </tr>
                         <tr>
-                          <td class="label-spec"> Model <span class="coln">:</span></td>
-                          <td class="value-spec"> {{ car.year_of_production }} </td>
+                            <td class="label-spec"> Model <span class="coln">:</span></td>
+                            <td class="value-spec"> {{ car.year_of_production }} </td>
                         </tr>
                         <tr>
-                          <td class="label-spec"> Power Windows <span class="coln">:</span></td>
-                          <td class="value-spec"> Yes </td>
+                            <td class="label-spec"> Power Windows <span class="coln">:</span></td>
+                            <td class="value-spec"> Yes</td>
                         </tr>
                         <tr class="odd">
-                          <td class="label-spec"> Airbags <span class="coln">:</span></td>
-                          <td class="value-spec"> Available </td>
+                            <td class="label-spec"> Airbags <span class="coln">:</span></td>
+                            <td class="value-spec"> Available</td>
                         </tr>
-                         <tr class="odd">
-                          <td class="label-spec"> ABS <span class="coln">:</span></td>
-                          <td class="value-spec"> Yes </td>
-                        </tr>
-                        <tr>
-                          <td class="label-spec"> Central Locking <span class="coln">:</span></td>
-                          <td class="value-spec"> Yes </td>
+                        <tr class="odd">
+                            <td class="label-spec"> ABS <span class="coln">:</span></td>
+                            <td class="value-spec"> Yes</td>
                         </tr>
                         <tr>
-                          <td class="label-spec"> Fog Lamps <span class="coln">:</span></td>
-                          <td class="value-spec"> Front </td>
+                            <td class="label-spec"> Central Locking <span class="coln">:</span></td>
+                            <td class="value-spec"> Yes</td>
                         </tr>
-                      </tbody>
+                        <tr>
+                            <td class="label-spec"> Fog Lamps <span class="coln">:</span></td>
+                            <td class="value-spec"> Front</td>
+                        </tr>
+                        </tbody>
                     </table>
                   </div>
                   <div class="email-addto-box">
@@ -147,7 +172,6 @@
               <li class="active"> <a href="#product_tabs_description" data-toggle="tab"> Vehicle Overview </a> </li>
               <li><a href="#product_tabs_tags" data-toggle="tab">Technical Specification</a></li>
              <li> <a href="#product_tabs_custom" data-toggle="tab">Accessories</a> </li>
-               <li> <a href="#reviews_tabs" data-toggle="tab">Reviews</a> </li>
 
             </ul>
             <div id="productTabContent" class="tab-content">
@@ -205,78 +229,7 @@
                     </table>
                   </div>
               </div>
-              <div class="tab-pane fade" id="reviews_tabs">
-                <div class="woocommerce-Reviews">
-                  <div>
-                    <h2 class="woocommerce-Reviews-title">2 reviews for <span>Bacca Bucci Men's Running Shoes</span></h2>
-                    <ol class="commentlist">
-                      <li class="comment">
-                        <div> <img alt="" src="{% static 'images/member1.png'%}" class="avatar avatar-60 photo">
-                          <div class="comment-text">
-                            <div class="ratings">
-                              <div class="rating-box">
-                                <div style="width:100%" class="rating"></div>
-                              </div>
-                            </div>
-                            <p class="meta"> <strong>John Doe</strong> <span>–</span> April 19, 2018 </p>
-                            <div class="description">
-                              <p>Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. Nulla quis lorem ut libero malesuada feugiat. Proin eget tortor risus. Donec rutrum congue leo eget malesuada. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                              <p>Donec sollicitudin molestie malesuada. Vivamus suscipit tortor eget felis porttitor volutpat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quis lorem ut libero malesuada feugiat. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus.</p>
-                            </div>
-                          </div>
-                        </div>
-                      </li>
-                      <!-- #comment-## -->
-                      <li class="comment">
-                        <div> <img alt="" src="{% static 'images/member2.png'%}" class="avatar avatar-60 photo">
-                          <div class="comment-text">
-                            <div class="ratings">
-                              <div class="rating-box">
-                                <div style="width:100%" class="rating"></div>
-                              </div>
-                            </div>
-                            <p class="meta"> <strong>Stephen Smith</strong> <span>–</span> June 02, 2018 </p>
-                            <div class="description">
-                              <p>Donec rutrum congue leo eget malesuada. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                            </div>
-                          </div>
-                        </div>
-                      </li>
-                      <!-- #comment-## -->
-                    </ol>
-                  </div>
-                  <div>
-                    <div>
-                      <div class="comment-respond"> <span class="comment-reply-title">Add a review </span>
-                        <form action="#" method="post" class="comment-form" novalidate>
-                          <p class="comment-notes"><span id="email-notes">Your email address will not be published.</span> Required fields are marked <span class="required">*</span></p>
-                          <div class="comment-form-rating">
-                            <label id="rating">Your rating</label>
-                            <p class="stars"> <span> <a class="star-1" href="#">1</a> <a class="star-2" href="#">2</a> <a class="star-3" href="#">3</a> <a class="star-4" href="#">4</a> <a class="star-5" href="#">5</a> </span> </p>
-                          </div>
-                          <p class="comment-form-comment">
-                            <label>Your review <span class="required">*</span></label>
-                              <textarea id="comment" name="comment" cols="45" rows="8" required></textarea>
-                          </p>
-                          <p class="comment-form-author">
-                            <label for="author">Name <span class="required">*</span></label>
-                            <input id="author" name="author" type="text" value="" size="30" required>
-                          </p>
-                          <p class="comment-form-email">
-                            <label for="email">Email <span class="required">*</span></label>
-                            <input id="email" name="email" type="email" value="" size="30" required>
-                          </p>
-                          <p class="form-submit">
-                            <input name="submit" type="submit" id="submit" class="submit" value="Submit">
-                          </p>
-                        </form>
-                      </div>
-                      <!-- #respond -->
-                    </div>
-                  </div>
-                  <div class="clear"></div>
-                </div>
-              </div>
+
               <div class="tab-pane fade" id="product_tabs_custom">
                 <div class="spec-row" id="summarySpecs">
                     <table width="100%">
@@ -336,19 +289,7 @@
     <!--col-main-->
   </div>
   <!--main-container-->
-    </div>
-
-{% include 'footer.html'%}
-</div>
-
-
-
-
-
-
-
-
-<!-- JavaScript -->
+    <!-- JavaScript -->
 <script type="text/javascript" src="{% static 'js/jquery.min.js'%}"></script>
 <script type="text/javascript" src="{% static 'js/bootstrap.min.js'%}"></script>
 <script src="{% static 'js/bootstrap-slider.min.js'%}"></script>
@@ -361,6 +302,17 @@
 <script src="{% static 'js/cloud-zoom.js'%}"></script>
 <script type="text/javascript" src="{% static 'js/jquery.mobile-menu.min.js'%}"></script>
 <script type="text/javascript">
+
+    function myFunction()
+    {
+      var x = document.getElementById("myDIV");
+      if (x.style.display === "none") {
+        x.style.display = "block";
+      } else {
+        x.style.display = "none";
+      }
+}
+
     function HideMe()
     {
         jQuery('.popup1').hide();
@@ -396,5 +348,4 @@
 
     }
 </script>
-</body>
-</html>
+ {% endblock %}

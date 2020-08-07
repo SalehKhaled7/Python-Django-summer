@@ -1,15 +1,12 @@
+{% extends 'homebase.html' %}
 {% load static %}
-<html lang="en">
-      <head>
-    <title>contact CarNex</title>
-    <meta name="description" content="{{setting.description}}">
-    <meta name="keywords" content="{{setting.keywords}}">
-    {% include 'head.html' %}
-</head>
-<body>
-<div id="page">
-    {% include 'header.html'%}
-<div account-login container>
+{% block title %} Contact Us {% endblock %}
+{% block description %} {{ setting.description }} {% endblock %}
+{% block keywords %} {{ setting.keywords }} {% endblock %}
+
+{% block sidebar %}  {% endblock %}
+{% block slider %} {% endblock %}
+{% block body %}
         <fieldset class="col2-set">
             <div class="col-1 new-users">
                 <strong>SEND A MESSAGE TO US</strong>
@@ -32,10 +29,4 @@
 
             </div> <!--col-2 registered-users-->
         </fieldset> <!--col2-set-->
-</div>
-
-{% include 'footer.html'%}
-</div>
-{% include 'footer2.html'%}
-</body>
-</html>
+{% endblock %}

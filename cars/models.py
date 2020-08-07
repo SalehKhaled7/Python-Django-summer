@@ -54,7 +54,7 @@ class Category(MPTTModel):
 
 class Car(models.Model):
     Status = (
-        ('new', 'YES'),
+        ('True', 'YES'),
         ('False', 'NO'),
     )
     TRANSMISSION = (
@@ -71,7 +71,7 @@ class Car(models.Model):
     keywords = models.CharField(max_length=255,blank=True)
     description = models.CharField(max_length=255,blank=True)
     slug = models.SlugField(null=False,unique=True,blank=True)
-    status = models.CharField(max_length=10, choices=Status ,default='YES')
+    status = models.CharField(max_length=10, choices=Status ,default='NO')
     photo = models.ImageField(blank=True, upload_to='images/',default='images/default_car.jpg')
     manufacturer = models.CharField(max_length=30)
     model = models.CharField(max_length=30)

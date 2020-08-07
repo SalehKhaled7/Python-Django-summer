@@ -44,6 +44,7 @@ class ContactFormMessage(models.Model):
         ('Read', 'Read'),
         ('Closed', 'Closed'),
     )
+    send_to = models.ForeignKey(User,default=User.objects.get(pk=1).id,on_delete=models.CASCADE)
     name = models.CharField(blank=True, max_length=20)
     email = models.CharField(blank=True, max_length=50)
     subject = models.CharField(blank=True, max_length=50)

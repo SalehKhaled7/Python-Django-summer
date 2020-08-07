@@ -2,7 +2,7 @@ import json
 from django.contrib import messages
 from django.contrib.auth import logout, authenticate, login
 from django.http import HttpResponseRedirect, HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from cars.models import Car, Category, Image
 from home.forms import SearchForm
 from home.models import Setting, ContactForm, ContactFormMessage, FAQ
@@ -12,10 +12,10 @@ from user.models import UserProfile
 
 def index(request):
     setting = Setting.objects.get()
-    slider_data = Car.objects.all()[:5]
+    slider_data = Car.objects.filter(status='True')[:5]
     category = Category.objects.all()
-    week_deals = Car.objects.all()[:5]
-    best_sell = Car.objects.all().order_by('?')[:5]
+    week_deals = Car.objects.filter(status='True')[:5]
+    best_sell = Car.objects.filter(status='True').order_by('?')[:5]
     context = {'setting': setting,
                'page':'index',
                'slider_data':slider_data,
@@ -63,11 +63,26 @@ def buy_a_car(request, id, slug):
 
 
 def car_details(request,id,slug):
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        car = Car.objects.get(pk=id)
+        if form.is_valid():
+            data = ContactFormMessage()
+            data.send_to = car.owner
+            data.name = form.cleaned_data['name']
+            data.email = form.cleaned_data['email']
+            data.subject = form.cleaned_data['subject']
+            data.message = form.cleaned_data['message']
+            data.ip = request.META.get('REMOTE_ADDR')
+            data.save()
+            messages.success(request, "the message has been send successfully ")
+            return redirect(request.META['HTTP_REFERER'])
     setting = Setting.objects.get()
     car = Car.objects.get(pk=id)
+    form = ContactForm()
     images = Image.objects.filter(cars_id=id)
     category = Category.objects.all()
-    context = {'setting': setting,'category': category,'car': car,'images': images,}
+    context = {'setting': setting,'category': category,'car': car,'images': images,'form':form,}
     return render(request,'car_details.html',context)
 
 

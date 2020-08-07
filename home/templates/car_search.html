@@ -1,10 +1,13 @@
+{% extends 'homebase.html' %}
 {% load static %}
-<html lang="en">
-    {% include 'head.html' %}
-<body>
-<div id="page">
-    {% include 'header.html'%}
-    <div class="content">
+{% block title %} {{ setting.title }} {% endblock %}
+{% block description %} {{ setting.description }} {% endblock %}
+{% block keywords %} {{ setting.keywords }} {% endblock %}
+
+{% block sidebar %}  {% endblock %}
+{% block slider %} {% endblock %}
+{% block body %}
+
            <div class="category-products">
              <ol class="products-list" id="products-list">
                  {% for rs in cars %}
@@ -25,10 +28,6 @@
             </ol>
           </div>
 
-    </div>
 
-{% include 'footer.html'%}
-</div>
-{% include 'footer2.html'%}
-</body>
-</html>
+{% endblock %}
+

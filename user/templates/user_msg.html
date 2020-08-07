@@ -1,0 +1,76 @@
+{% load static %}
+<html lang="en">
+<head>
+    <title>user panel</title>
+
+</head>
+
+<body>
+<div id="page">
+    {% include 'header.html' %}
+    <section class="main-container col2-left-layout bounceInUp animated">
+        <div class="container">
+            <div class="row">
+                <div class="col-main col-sm-9 col-sm-push-3 product-grid">
+                    <div class="pro-coloumn">
+                        <article class="col-main">
+                            <div class="toolbar">
+                                <div class="sorter">
+                                    <h3 style="margin-bottom: 0;margin-top: 0">My Messages</h3>
+                                </div>
+                            </div>
+                            <div class="category-products"> <!-- main right-->
+                                <div class="table-responsive">
+                                    <table class="data-table table-striped" id="my-orders-table">
+                                        <colgroup>
+                                            <col width="">
+                                            <col width="">
+                                            <col>
+                                            <col width="1">
+                                            <col width="1">
+                                            <col width="20%">
+                                        </colgroup>
+                                        <thead>
+                                        <tr class="first last">
+                                            <th>from </th>
+                                            <th>Date</th>
+                                            <th>Email </th>
+                                            <th>Subject</th>
+                                            <th>Message</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for msg in messages %}
+                                        <tr class="first odd">
+                                            <td>{{ msg.name }}</td>
+                                            <td><span class="nobr">{{ msg.create_at}}</span></td>
+                                            <td>{{ msg.email }}</td>
+                                            <td>{{ msg.subject }}</td>
+                                            <td><em>{{ msg.message }}</em></td>
+
+                                        </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                        </article>
+
+                    </div>
+
+                </div>
+                {% include 'user_nav.html' %}
+                <!--col-right sidebar-->
+
+            </div>
+
+            <!--row-->
+        </div>
+    </section>
+
+    {% include 'footer.html' %}
+</div>
+{% include 'footer2.html' %}
+</body>
+</html>

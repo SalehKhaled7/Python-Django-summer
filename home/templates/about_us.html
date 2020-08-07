@@ -1,22 +1,13 @@
-{% load static %}
-<html lang="en">
-   <head>
-    <title>about CarNex</title>
-    <meta name="description" content="{{setting.description}}">
-    <meta name="keywords" content="{{setting.keywords}}">
-    {% include 'head.html' %}
-</head>
-<body>
-<div id="page">
-    {% include 'header.html'%}
-    <div class="content">
-        <div class="account-login container">
+{% extends 'homebase.html' %}
+
+{% block title %} about Car Nex {% endblock %}
+{% block description %} {{ setting.description }} {% endblock %}
+{% block keywords %} {{ setting.keywords }} {% endblock %}
+
+{% block sidebar %}  {% endblock %}
+{% block slider %}  {% endblock %}
+{% block body %}
+    <div class="account-login container">
         {{ setting.about_us|safe }}
         </div>
-    </div>
-
-{% include 'footer.html'%}
-</div>
-{% include 'footer2.html'%}
-</body>
-</html>
+{% endblock %}

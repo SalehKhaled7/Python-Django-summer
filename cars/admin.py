@@ -49,7 +49,7 @@ class CarAdmin(admin.ModelAdmin):
 
 
 class ImageAdmin(admin.ModelAdmin):
-    list_display = ['title','image_tag']
+    list_display = ['title','image_tag','cars']
     readonly_fields = ('image_tag',)
 
 

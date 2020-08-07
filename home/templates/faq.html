@@ -1,10 +1,11 @@
+{% extends 'homebase.html' %}
 {% load static %}
-<html lang="en">
-   <head>
-    <title>faqs</title>
-    <meta name="description" content="">
-    <meta name="keywords" content="">
-       <script>
+
+{% block title %}{{ setting.title }}{% endblock %}
+{% block description %}{{ setting.description }}{% endblock %}
+{% block keywords %}{{ setting.keywords }}{% endblock %}
+{% block head %}
+           <script>
         $( function() {
             $( "#accordion" ).accordion();
         } );
@@ -17,10 +18,11 @@
 
            }
        </style>
-</head>
-<body>
+{% endblock %}
+{% block sidebar %} {% endblock %}
+{% block slider %}{% endblock %}
+{% block body %}
 
-    {% include 'header.html'%}
 
         <div class="account-login container">
         <div class="text-center" style="padding-top: 20px"><h1>FAQS</h1></div>
@@ -38,8 +40,4 @@
 
         </div>
 
-{% include 'footer.html'%}
-
-{% include 'footer2.html'%}
-</body>
-</html>
+{% endblock %}
