@@ -3,7 +3,8 @@ from django.contrib import messages
 from django.contrib.auth import logout, authenticate, login
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, redirect
-from cars.models import Car, Category, Image
+from cars.models import Car, Category, Image, Brand
+from content.models import Menu, Content, CImage
 from home.forms import SearchForm
 from home.models import Setting, ContactForm, ContactFormMessage, FAQ
 from user.forms import SignUpForm
@@ -16,12 +17,16 @@ def index(request):
     category = Category.objects.all()
     week_deals = Car.objects.filter(status='True')[:5]
     best_sell = Car.objects.filter(status='True').order_by('?')[:5]
+    brands = Brand.objects.all()
+    menu =Menu.objects.all()
     context = {'setting': setting,
                'page':'index',
                'slider_data':slider_data,
                'category': category,
                'week_deals': week_deals,
                'best_sell': best_sell,
+               'brands': brands,
+               'menu': menu,
                }
     return render(request,'index.html',context)
 
@@ -166,6 +171,29 @@ def faq(request):
     context = {'category': category,
                'faq': faq, }
     return render(request, 'faq.html', context)
+
+def menu(request,id):
+    content = Content.objects.get(menu_id=id)
+
+    if content:
+        link = '/content/'+str(content.id)+'/menu'
+        return HttpResponseRedirect(link)
+    else:
+        messages.warning(request,'page not found !')
+        link = '/'
+        return HttpResponseRedirect(link)
+
+def contentDetail(request,id,slug):
+    category = Category.objects.all()
+    menu = Menu.objects.all()
+    content = Content.objects.get(pk=id)
+    images = CImage.objects.filter(content_id=id)
+    context = {'category': category,
+               'menu': menu,
+               'content': content,
+               'images': images,}
+    return render(request, 'content_detail.html', context)
+
 
 
 

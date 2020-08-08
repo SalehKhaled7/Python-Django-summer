@@ -1,9 +1,8 @@
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.contrib.auth.models import User
 from django.db import models
-
-# Create your models here.
 from django.forms import ModelForm, TextInput, Textarea
+
 
 
 class Setting(models.Model):
@@ -84,3 +83,6 @@ class FAQ(models.Model):
 
     def __str__(self):
         return self.question
+
+
+

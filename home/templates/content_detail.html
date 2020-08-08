@@ -9,6 +9,13 @@
 {% block slider %}{% endblock %}
 {% block body %}
     <div class="account-login container">
+    {% if content.image %}
+        <img src="{{ content.image.url }}" height="200px">
+    {% endif %}
+        {{ content.detail|safe }}
+        {% for rs in images %}
+            <img src="{{ rs.image.url }}">
+        {% endfor %}
+    </div>
 
-        </div>
 {% endblock %}

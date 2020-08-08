@@ -2,11 +2,12 @@
 {% load mptt_tags %}
 <head>
     <style>
-        #logo{
+        #logo {
             margin-top: -20px;
             margin-left: 60px;
         }
-        .level0-wrapper{
+
+        .level0-wrapper {
             position: relative;
             z-index: 10;
         }
@@ -14,168 +15,161 @@
     </style>
 </head>
 <header>
-<script>
+    <script>
 
-  $(function() {
-    $("#query").autocomplete({
-      source: "/search_auto/",
-      select: function (event, ui) { //item selected
-        AutoCompleteSelectHandler(event, ui)
-      },
-      minLength: 2,
-    });
-  });
+        $(function () {
+            $("#query").autocomplete({
+                source: "/search_auto/",
+                select: function (event, ui) { //item selected
+                    AutoCompleteSelectHandler(event, ui)
+                },
+                minLength: 2,
+            });
+        });
 
-  function AutoCompleteSelectHandler(event, ui)
-  {
-    var selectedObj = ui.item;
-  }
+        function AutoCompleteSelectHandler(event, ui) {
+            var selectedObj = ui.item;
+        }
 
-</script>
+    </script>
     <div class="container">
-      <div class="row">
-        <div id="header">
-          <div class="header-container">
-            <div class="header-logo"> <a href="/home/" title="Car HTML" class="logo">
-              <img  id="logo" src="{%static 'images/logo.png'%}" alt="Car Store">
-              </a> </div>
-            <div class="header__nav">
-              <div class="header-banner">
-                <div class="col-lg-6 col-xs-12 col-sm-6 col-md-6">
-                  <div class="assetBlock">
-                    <div style="height: 20px; overflow: hidden;" id="slideshow">
-                      <p style="display: block;">Hot days! - <span>50%</span> Get ready for summer! </p>
-                      <p style="display: none;">Save up to <span>40%</span> Hurry limited offer!</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-6 col-lg-6 col-xs-12 col-sm-6 col-md-6 call-us"><i class="fa fa-clock-o"></i> Mon - Fri : 09am to 06pm <i class="fa fa-phone"></i> +1 800 789 0000</div>
-              </div>
-              <div class="fl-header-right">
-                <div class="fl-links">
-                  <div class="no-js">
-                     {% if user.is_authenticated %}
-                         <a title="" class="clicker">{{ user.get_username }}</a>
-                             <div class="fl-nav-links">
-                                  <ul class="links">
-                                    <li><a href="/user/msg" title="My Account">messages</a></li>
-                                    <li><a href="/user/" title="My Account">my profile</a></li>
-                                    <li><a href="/logout/" title="My Account">logout</a></li>
-                                 </ul>
-                             </div>
-                     {% else %}
-                         <a title=""  href="/login"><h2>Login/Register</h2></a>
-                     {% endif %}
-                        <!-- login end-->
-                  </div>
-                </div>
-                <div class="collapse navbar-collapse">
-                  <form class="navbar-form" role="search" action="/search/" method="post">
-                      {% csrf_token %}
-                    <div class="input-group">
-                      <input name="query" id="query" type="text" class="form-control" placeholder="Search">
-                        <span class="input-group-btn">
-                      <button type="submit" class="search-btn"> <span class="glyphicon glyphicon-search"> <span class="sr-only">Search</span> </span> </button>
-                      </span>
-                    </div>
-                  </form>
-                </div>
-                <!--links-->
-              </div>
-              <div class="fl-nav-menu">
-                <nav>
-                  <div class="mm-toggle-wrap">
-                    <div class="mm-toggle"><i class="fa fa-bars"></i><span class="mm-label">Menu</span> </div>
-                  </div>
-                  <div class="nav-inner">
-                    <!-- BEGIN NAV -->
-                    <ul id="nav" class="hidden-xs">
-                      <li class="active"> <a class="level-top" href="/home/"><span>Home</span></a></li>
-
-                      <li class="mega-menu"> <a class="level-top" ><span>buy a vehicle</span></a>
-                        <div class="level0-wrapper dropdown-6col" style="left: 0px; display: none;">
-                          <div class="container">
-                            <div class="level0-wrapper2">
-                              <div class="nav-block nav-block-center">
-                                <!--mega menu-->
-                                <ul class="level0">
-                                    {% recursetree category %}
-                                  <li class="level3 nav-6-1 parent item"><a href="/buy/{{ node.id }}/{{ node.slug }}"><span>{{ node.title }}</span></a>
-                                    <!--sub sub category-->
-                                      {% if not node.is_leaf_node %}
-                                    <ul class="level1">
-                                      <li class="level2 nav-6-1-1"> <a href="grid.html"><span>{{ children }}</span></a> </li>
-                                      <!--level2 nav-6-1-1-->
-                                    </ul>
-                                      {% endif %}
-                                    <!--level1-->
-                                    <!--sub sub category-->
-                                  </li>
-                                  <!--level3 nav-6-1 parent item-->
-
-                                    {% endrecursetree %}
-                                  <!--level3 nav-6-1 parent item-->
-                                </ul>
-                                <!--level0-->
-                              </div>
-                              <!--nav-block nav-block-center-->
-
+        <div class="row">
+            <div id="header">
+                <div class="header-container">
+                    <div class="header-logo"><a href="/home/" title="Car HTML" class="logo">
+                        <img id="logo" src="{% static 'images/logo.png' %}" alt="Car Store">
+                    </a></div>
+                    <div class="header__nav">
+                        <div class="header-banner">
+                            <div class="col-lg-6 col-xs-12 col-sm-6 col-md-6">
+                                <div class="assetBlock">
+                                    <div style="height: 20px; overflow: hidden;" id="slideshow">
+                                        <p style="display: block;">Hot days! - <span>50%</span> Get ready for summer!
+                                        </p>
+                                        <p style="display: none;">Save up to <span>40%</span> Hurry limited offer!</p>
+                                    </div>
+                                </div>
                             </div>
-                            <!--level0-wrapper2-->
-                          </div>
-                          <!--container-->
+                            <div class="col-lg-6 col-lg-6 col-xs-12 col-sm-6 col-md-6 call-us"><i
+                                    class="fa fa-clock-o"></i> Mon - Fri : 09am to 06pm <i class="fa fa-phone"></i> {{ setting.phone }}
+                            </div>
                         </div>
-                        <!--level0-wrapper dropdown-6col-->
-                        <!--mega menu-->
-                      </li>
-                      <li class="level0 parent drop-menu">
-                           {% if user.is_authenticated %}
-                          <a class="level-top" href="/user/new/ad/">
-                              {% else %}
-                               <a class="level-top" href="/login">
-                              {% endif %}
-                              <span>sell your vehicle‎</span></a></li>
-                      <li class="level0 parent drop-menu"> <a class="level-top" href="/aboutus/"><span>about us</span></a></li>
-                      <li class="mega-menu hidden-sm"> <a class="level-top" href="/contact/"><span>contact us‎</span></a> </li>
-                      <li class="level0 parent drop-menu"><a href="#"><span>Pages</span> </a>
-                        <!--sub sub category-->
-                        <ul class="level1">
-                          <li class="level1"> <a href="/aboutus/"> <span>About us</span> </a> </li>
-                          <li class="level1 nav-10-4"> <a href="shopping-cart.html"> <span>Cart Page</span> </a> </li>
-                          <li class="level1 first parent"><a href="checkout.html"><span>Checkout</span></a>
-                            <!--sub sub category-->
-                            <ul class="level2 right-sub">
-                              <li class="level2 nav-2-1-1 first"><a href="checkout-method.html"><span>Method</span></a></li>
-                              <li class="level2 nav-2-1-5 last"><a href="checkout-billing-info.html"><span>Billing Info</span></a></li>
-                            </ul>
-                            <!--sub sub category-->
-                          </li>
-                          <li class="level1 nav-10-4"> <a href="wishlist.html"> <span>Wishlist</span> </a> </li>
-                          <li class="level1"> <a href="dashboard.html"> <span>Dashboard</span> </a> </li>
-                          <li class="level1"> <a href="multiple-addresses.html"> <span>Multiple Addresses</span> </a> </li>
-                          <li class="level1"><a href="contact-us.html"><span>Contact us</span></a> </li>
-                          <li class="level1"><a href="404error.html"><span>404 Error Page</span></a> </li>
-                          <li class="level1"><a href="login.html"><span>Login Page</span></a> </li>
-                          <li class="level1"><a href="quickview.html"><span>Quick View</span></a> </li>
-                          <li class="level1"><a href="newsletter.html"><span>Newsletter</span></a> </li>
-                        </ul>
-                      </li>
-                      <li class="level1"> <a href="/faq/" > <span>FAQ</span> </a></li>
-                    </ul>
-                    <!--nav-->
-                  </div>
-                </nav>
-              </div>
+                        <div class="fl-header-right">
+                            <div class="fl-links">
+                                <div class="no-js">
+                                    {% if user.is_authenticated %}
+                                        <a title="" class="clicker">{{ user.get_username }}</a>
+                                        <div class="fl-nav-links">
+                                            <ul class="links">
+                                                <li><a href="/user/msg" title="My Account">messages</a></li>
+                                                <li><a href="/user/" title="My Account">my profile</a></li>
+                                                <li><a href="/logout/" title="My Account">logout</a></li>
+                                            </ul>
+                                        </div>
+                                    {% else %}
+                                        <a title="" href="/login"><h2>Login/Register</h2></a>
+                                    {% endif %}
+                                    <!-- login end-->
+                                </div>
+                            </div>
+                            <div class="collapse navbar-collapse">
+                                <form class="navbar-form" role="search" action="/search/" method="post">
+                                    {% csrf_token %}
+                                    <div class="input-group">
+                                        <input name="query" id="query" type="text" class="form-control"
+                                               placeholder="Search">
+                                        <span class="input-group-btn">
+                      <button type="submit" class="search-btn"> <span class="glyphicon glyphicon-search"> <span
+                              class="sr-only">Search</span> </span> </button>
+                      </span>
+                                    </div>
+                                </form>
+                            </div>
+                            <!--links-->
+                        </div>
+                        <div class="fl-nav-menu">
+                            <nav>
+                                <div class="mm-toggle-wrap">
+                                    <div class="mm-toggle"><i class="fa fa-bars"></i><span class="mm-label">Menu</span>
+                                    </div>
+                                </div>
+                                <div class="nav-inner">
+                                    <!-- BEGIN NAV -->
+                                    <ul id="nav" class="hidden-xs">
+                                        <li class="active"><a class="level-top" href="/home/"><span>Home</span></a></li>
+
+                                        <li class="mega-menu"><a class="level-top"><span>buy a vehicle</span></a>
+                                            <div class="level0-wrapper dropdown-6col" style="left: 0px; display: none;">
+                                                <div class="container">
+                                                    <div class="level0-wrapper2">
+                                                        <div class="nav-block nav-block-center">
+                                                            <!--mega menu-->
+                                                            <ul class="level0">
+                                                                {% recursetree category %}
+                                                                    <li class="level3 nav-6-1 parent item"><a
+                                                                            href="/buy/{{ node.id }}/{{ node.slug }}"><span>{{ node.title }}</span></a>
+                                                                        {% if not node.is_leaf_node %}
+                                                                            <ul class="level1">
+                                                                                <li class="level2 nav-6-1-1"><a
+                                                                                        href="#"><span>{{ children }}</span></a>
+                                                                                </li>
+                                                                            </ul>
+                                                                        {% endif %}
+                                                                    </li>
+                                                                {% endrecursetree %}
+                                                                <!--level3 nav-6-1 parent item-->
+                                                            </ul>
+                                                            <!--level0-->
+                                                        </div>
+                                                        <!--nav-block nav-block-center-->
+
+                                                    </div>
+                                                    <!--level0-wrapper2-->
+                                                </div>
+                                                <!--container-->
+                                            </div>
+                                            <!--level0-wrapper dropdown-6col-->
+                                            <!--mega menu-->
+                                        </li>
+                                        <li class="level0 parent drop-menu">
+                                            {% if user.is_authenticated %}
+                                                <a class="level-top" href="/user/new/ad/">
+                                            {% else %}
+                                                <a class="level-top" href="/login">
+                                            {% endif %}
+                                            <span>sell your vehicle‎</span></a></li>
+                                        <li class="level0 parent drop-menu"><a class="level-top" href="/aboutus/"><span>about us</span></a>
+                                        </li>
+                                        <li class="mega-menu hidden-sm"><a class="level-top" href="/contact/"><span>contact us‎</span></a>
+                                        </li>
+                                    {% if menu %}
+                                    {% recursetree menu %}
+                                        <li class="level0 parent drop-menu"><a href="/menu/{{ node.id }}"><span>{{ node.title }}</span> </a>
+                                            <!--sub sub category-->
+                                            {% if not node.is_leaf_node %}
+                                            <ul class="level1">
+                                                <li class="level1"><a href="#"><span>{{ children }}</span></a></li>
+                                            </ul>
+                                            {% endif %}
+                                        </li>
+                                    {% endrecursetree %}
+                                    {% endif %}
+                                        <li class="level1"><a href="/faq/"> <span>FAQ</span> </a></li>
+                                    </ul>
+                                    <!--nav-->
+                                </div>
+                            </nav>
+                        </div>
+                    </div>
+
+                    <!--row-->
+
+                </div>
             </div>
-
-            <!--row-->
-
-          </div>
         </div>
-      </div>
     </div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"> </script>
-<!-- jQuery UI !-->
-<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
-  </header>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <!-- jQuery UI !-->
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+</header>

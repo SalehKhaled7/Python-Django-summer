@@ -100,7 +100,7 @@ class Car(models.Model):
 
 class Image(models.Model):
     cars = models.ForeignKey(Car, on_delete=models.CASCADE)
-    title = models.CharField(max_length=30)
+    title = models.CharField(max_length=30,blank=True)
     image = models.ImageField(blank=True, upload_to='images/',null=True)
 
     def __str__(self):
@@ -130,3 +130,14 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.subject
+
+class Brand(models.Model):
+    name = models.CharField(max_length=20)
+    image = models.ImageField( upload_to='images/brands',)
+
+    def __str__(self):
+        return self.name
+
+    def image_tag(self):
+        return mark_safe('<img src="{}" height="50"/>'.format(self.image.url))
+    image_tag.short_description = 'Image'

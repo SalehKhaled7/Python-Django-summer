@@ -1,7 +1,7 @@
 from django.urls import path
 from .views import  VehicleDetailView
 from user import views
-app_name='cars'
+
 urlpatterns = [
     path('', views.index, name='index'),
     path('update/', views.user_update, name='user_update'),

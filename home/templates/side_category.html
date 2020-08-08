@@ -1,0 +1,22 @@
+ <div class="side-nav-categories">
+                        <div class="block-title"> Categories</div>
+                        <!--block-title-->
+                        <!-- BEGIN BOX-CATEGORY -->
+                        <div class="box-content box-category">
+                            <ul>
+                                {% recursetree category %}
+                                    <li><a href="">{{ node.title }}</a> <span class="subDropdown plus"></span>
+                                        {% if not node.is_leaf_node %}
+                                        <ul class="level0_455" style="display:none">
+                                            <li><a href="/buy/{{ node.id }}/{{ node.slug }}">{{ children }} </a> <span class=""></span></li>
+                                            </li>
+                                        </ul>
+                                         {% endif %}
+                                    </li>
+                                    <!--level 0-->
+                                {% endrecursetree %}
+                            </ul>
+
+                        </div>
+                        <!--box-content box-category-->
+                    </div>
