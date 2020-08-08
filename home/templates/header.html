@@ -1,5 +1,8 @@
 {% load static %}
 {% load mptt_tags %}
+{% load mytags %}
+{% category_list as category%}
+{% menu_list as menu %}
 <head>
     <style>
         #logo {
@@ -11,6 +14,11 @@
             position: relative;
             z-index: 10;
         }
+        #test{
+
+            margin-top: -40px;
+        }
+
 
     </style>
 </head>
@@ -107,13 +115,13 @@
                                                             <ul class="level0">
                                                                 {% recursetree category %}
                                                                     <li class="level3 nav-6-1 parent item"><a
-                                                                            href="/buy/{{ node.id }}/{{ node.slug }}"><span>{{ node.title }}</span></a>
+                                                                            {% if node.is_leaf_node %}href="/buy/{{ node.id }}/{{ node.slug }}"{% endif %}><span>{{ node.title }}</span></a>
                                                                         {% if not node.is_leaf_node %}
+                                                                            <div id="test">
                                                                             <ul class="level1">
-                                                                                <li class="level2 nav-6-1-1"><a
-                                                                                        href="#"><span>{{ children }}</span></a>
-                                                                                </li>
+                                                                                <li class="level2 nav-6-1-1"><a href="#"><span>{{ children }}</span></a></li>
                                                                             </ul>
+                                                                            </div>
                                                                         {% endif %}
                                                                     </li>
                                                                 {% endrecursetree %}
@@ -142,18 +150,20 @@
                                         </li>
                                         <li class="mega-menu hidden-sm"><a class="level-top" href="/contact/"><span>contact us‎</span></a>
                                         </li>
-                                    {% if menu %}
-                                    {% recursetree menu %}
-                                        <li class="level0 parent drop-menu"><a href="/menu/{{ node.id }}"><span>{{ node.title }}</span> </a>
-                                            <!--sub sub category-->
-                                            {% if not node.is_leaf_node %}
-                                            <ul class="level1">
-                                                <li class="level1"><a href="#"><span>{{ children }}</span></a></li>
-                                            </ul>
-                                            {% endif %}
-                                        </li>
-                                    {% endrecursetree %}
-                                    {% endif %}
+                                        {% if menu %}
+                                            {% recursetree menu %}
+                                                <li class="level0 parent drop-menu"><a
+                                                       {% if node.is_leaf_node %} href="/menu/{{ node.id }}"{% endif %}><span>{{ node.title }}</span> </a>
+                                                    <!--sub sub category-->
+                                                    {% if not node.is_leaf_node %}
+                                                        <ul class="level1">
+                                                            <li class="level1"><a
+                                                                    href="#"><span>{{ children }}</span></a></li>
+                                                        </ul>
+                                                    {% endif %}
+                                                </li>
+                                            {% endrecursetree %}
+                                        {% endif %}
                                         <li class="level1"><a href="/faq/"> <span>FAQ</span> </a></li>
                                     </ul>
                                     <!--nav-->

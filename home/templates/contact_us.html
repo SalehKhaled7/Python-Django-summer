@@ -3,10 +3,20 @@
 {% block title %} Contact Us {% endblock %}
 {% block description %} {{ setting.description }} {% endblock %}
 {% block keywords %} {{ setting.keywords }} {% endblock %}
+{% block head %}
+    <style>
+    .input{
+        width: 100%;
+
+
+    }
+    </style>
+{% endblock %}
 
 {% block sidebar %}  {% endblock %}
 {% block slider %} {% endblock %}
 {% block body %}
+    <div class="account-login container">
         <fieldset class="col2-set">
             <div class="col-1 new-users">
                 <strong>SEND A MESSAGE TO US</strong>
@@ -19,8 +29,8 @@
                 {% endif %}
                 <form class="form-list" action="" method="post">
                     {% csrf_token %}
-                    {{ form.as_p }}
-                    <input type="submit" value="SEND">
+                    {{ form.as_ul }}
+                    <input class="button login"  type="submit" value="SEND">
                 </form>
 
             </div>
@@ -29,4 +39,5 @@
 
             </div> <!--col-2 registered-users-->
         </fieldset> <!--col2-set-->
+    </div>
 {% endblock %}

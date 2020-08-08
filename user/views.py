@@ -13,10 +13,11 @@ from .forms import CarModelForm
 
 
 def index(request):
-    category = Category.objects.all()
+    #category = Category.objects.all()
     current_user = request.user
     profile = UserProfile.objects.get(user_id=current_user.id)
-    context = {'category': category,
+    context = {
+        #'category': category,
                'profile': profile, }
     return render(request, 'user_profile.html', context)
 
@@ -31,11 +32,11 @@ def user_update(request):
             messages.success(request, 'Your account has been updated!')
             return HttpResponseRedirect('/user')
     else:
-        category = Category.objects.all()
+        #category = Category.objects.all()
         user_form = UserUpdateForm(instance=request.user)
         profile_form = ProfileUpdateForm(instance=request.user.userprofile)  # "userprofile" model -> OneToOneField relations with user
         context = {
-            'category': category,
+            #'category': category,
             'user_form': user_form,
             'profile_form': profile_form
         }
@@ -54,9 +55,11 @@ def user_password(request):
             messages.error(request, 'Please correct the error below.<br>' + str(form.errors))
             return HttpResponseRedirect('/user/password')
     else:
-        category = Category.objects.all()
+        #category = Category.objects.all()
         form = PasswordChangeForm(request.user)
-        return render(request, 'user_password.html', {'form': form, 'category': category})
+        return render(request, 'user_password.html', {'form': form,
+                                                      #'category': category,
+                                                      })
 
 
 class VehicleDetailView(DetailView):
@@ -90,18 +93,19 @@ def user_new_ad(request):
     else:
         form = CarModelForm()
         formset = image_form_set(queryset=Image.objects.filter(cars=request.user.id))
-    category = Category.objects.all()
+    #category = Category.objects.all()
     context = {'form': form,
-               'category': category,
+               #'category': category,
                'formset': formset, }
     return render(request, 'new_ad.html', context)
 
 
 def user_ads(request):
     ads = Car.objects.filter(owner=request.user)
-    category = Category.objects.all()
+    #category = Category.objects.all()
     context = {'ads': ads,
-               'category': category, }
+               #'category': category,
+               }
     return render(request, 'user_ads.html', context)
 
 
@@ -128,9 +132,9 @@ def user_ad_update(request, pk):
     else:
         form = CarModelForm(instance=ad)
         formset = image_form_set(queryset=Image.objects.filter(cars=ad))
-        category = Category.objects.all()
+        #category = Category.objects.all()
         context = {
-            'category': category,
+            #'category': category,
             'form': form,
             'formset': formset,
         }
@@ -144,15 +148,17 @@ def user_ad_delete(request, pk):
     if request.method == "POST":
         ad.delete()
         return HttpResponseRedirect('/user/ads/')
-    category = Category.objects.all()
-    context = {'category': category,
+    #category = Category.objects.all()
+    context = {
+        #'category': category,
                'ad': ad, }
     return render(request, 'user_ad_delete.html', context)
 
 
 def user_msg(request):
     messages = ContactFormMessage.objects.filter(send_to=request.user)
-    category = Category.objects.all()
+    #category = Category.objects.all()
     context = {'messages': messages,
-               'category': category, }
+               #'category': category,
+                }
     return render(request, 'user_msg.html', context)

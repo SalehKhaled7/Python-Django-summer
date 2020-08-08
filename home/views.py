@@ -14,27 +14,30 @@ from user.models import UserProfile
 def index(request):
     setting = Setting.objects.get()
     slider_data = Car.objects.filter(status='True')[:5]
-    category = Category.objects.all()
+    #category = Category.objects.all()
     week_deals = Car.objects.filter(status='True')[:5]
     best_sell = Car.objects.filter(status='True').order_by('?')[:5]
     brands = Brand.objects.all()
-    menu =Menu.objects.all()
+    #menu =Menu.objects.all()
     context = {'setting': setting,
                'page':'index',
                'slider_data':slider_data,
-               'category': category,
+               #'category': category,
                'week_deals': week_deals,
                'best_sell': best_sell,
                'brands': brands,
-               'menu': menu,
+               #'menu': menu,
                }
     return render(request,'index.html',context)
 
 
 def about_us(request):
     setting = Setting.objects.get()
-    category = Category.objects.all()
-    context = {'setting': setting,'page':'about_us','category': category,}
+    #category = Category.objects.all()
+    context = {'setting': setting,
+               'page':'about_us',
+               #'category': category,
+               }
     return render(request,'about_us.html',context)
 
 
@@ -53,9 +56,12 @@ def contact(request):
             return HttpResponseRedirect("/contact")
 
     setting = Setting.objects.get()
-    category = Category.objects.all()
+    #category = Category.objects.all()
     form = ContactForm()
-    context = {'setting': setting,'form':form,'category': category,}
+    context = {'setting': setting,
+               'form':form,
+               #'category': category,
+               }
     return render(request,'contact_us.html',context)
 
 
@@ -63,7 +69,9 @@ def buy_a_car(request, id, slug):
     setting = Setting.objects.get()
     cars = Car.objects.filter(category_id=id)
     category = Category.objects.all()
-    context = {'setting': setting,'category': category,'cars': cars,}
+    context = {'setting': setting,
+               'category': category,
+               'cars': cars,}
     return render(request,'buy.html',context)
 
 
@@ -86,8 +94,13 @@ def car_details(request,id,slug):
     car = Car.objects.get(pk=id)
     form = ContactForm()
     images = Image.objects.filter(cars_id=id)
-    category = Category.objects.all()
-    context = {'setting': setting,'category': category,'car': car,'images': images,'form':form,}
+    #category = Category.objects.all()
+    context = {'setting': setting,
+               # 'category': category,
+               'car': car,
+               'images': images,
+               'form': form,
+               }
     return render(request,'car_details.html',context)
 
 
@@ -95,11 +108,12 @@ def car_search(request):
     if request.method == "POST":
         form = SearchForm(request.POST)
         if form.is_valid():
-            category = Category.objects.all()
+            #category = Category.objects.all()
             query = form.cleaned_data['query']
             cars = Car.objects.filter(title__icontains=query)
             context = {'cars': cars,
-                       'category': category,}
+                       #'category': category,
+                       }
             return render(request, 'car_search.html', context)
     return HttpResponseRedirect('/')
 
@@ -138,8 +152,10 @@ def login_view(request):
             messages.warning(request, "wrong user name or password please try again")
             return HttpResponseRedirect("/login")
 
-    category = Category.objects.all()
-    context = {'category': category,}
+    #category = Category.objects.all()
+    context = {
+        #'category': category,
+    }
     return render(request,'login.html', context)
 
 
@@ -159,16 +175,18 @@ def signup_view(request):
             return HttpResponseRedirect('/')
 
     form = SignUpForm()
-    category = Category.objects.all()
-    context = {'category': category,
-               'form': form, }
+    # category = Category.objects.all()
+    context = {
+        # 'category': category,
+        'form': form, }
     return render(request, 'signup.html', context)
 
 
 def faq(request):
     faq = FAQ.objects.filter(status="True").order_by("question_num")
-    category = Category.objects.all()
-    context = {'category': category,
+    #category = Category.objects.all()
+    context = {
+        #'category': category,
                'faq': faq, }
     return render(request, 'faq.html', context)
 
@@ -184,14 +202,15 @@ def menu(request,id):
         return HttpResponseRedirect(link)
 
 def contentDetail(request,id,slug):
-    category = Category.objects.all()
+    #category = Category.objects.all()
     menu = Menu.objects.all()
     content = Content.objects.get(pk=id)
     images = CImage.objects.filter(content_id=id)
-    context = {'category': category,
-               'menu': menu,
-               'content': content,
-               'images': images,}
+    context = {
+        # 'category': category,
+        'menu': menu,
+        'content': content,
+        'images': images, }
     return render(request, 'content_detail.html', context)
 
 

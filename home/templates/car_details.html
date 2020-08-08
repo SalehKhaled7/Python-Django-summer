@@ -5,341 +5,357 @@
 {% block keywords %} {{ car.keywords }} {% endblock %}
 {% block head %}
     <style>
-    #myDIV{
-        display: none;
-    }
+        #myDIV {
+            display: none;
+        }
+        .input {
+            width: 100%;
+        }
     </style>
 {% endblock %}
 
 {% block sidebar %}  {% endblock %}
 {% block slider %} {% endblock %}
 {% block body %}
-          <!-- BEGIN Main Container -->
-  <div class="main-container col1-layout wow bounceInUp animated">
-    <div class="main">
-      <div class="col-main">
-        <!-- Endif Next Previous Product -->
-        <div class="product-view wow bounceInUp animated" itemscope="" itemtype="http://schema.org/Product" itemid="#product_base">
-          <div id="messages_product_view"></div>
-          <!--product-next-prev-->
-          <div class="product-essential container">
-            <div class="row">
-              <form action="#" method="post" id="product_addtocart_form">
-                <!--End For version 1, 2, 6 -->
-                <!-- For version 3 -->
-                <div class="product-img-box col-lg-5 col-sm-5 col-xs-12">
-                  <div class="new-label new-top-left">Hot</div>
-                  <div class="sale-label sale-top-left">-15%</div>
-                   <div class="product-image">
-                    <div class="product-full"> <img id="product-zoom1" src="{{car.photo.url}}" data-zoom-image="{{car.photo.url}}" alt="product-image"/> </div>
-                    <div class="more-views">
-                      <div class="slider-items-products">
-                        <div id="gallery_02" class="product-flexslider hidden-buttons product-img-thumb">
-                          <div class="slider-items slider-width-col4 block-content">
-                              {% for rs in images %}
-                            <div class="more-views-items"> <a href="#" data-image="{{ rs.image.url }}" data-zoom-image="{{ rs.image.url }}"> <img id="product-zoom0"  src="{{ rs.image.url }}" alt="product-image"/> </a></div>
-                          {% endfor %}
-                          </div>
+    <!-- BEGIN Main Container -->
+    <div class="main-container col1-layout wow bounceInUp animated">
+        <div class="main">
+            <div class="col-main">
+                <!-- Endif Next Previous Product -->
+                <div class="product-view wow bounceInUp animated" itemscope="" itemtype="http://schema.org/Product"
+                     itemid="#product_base">
+                    <div id="messages_product_view"></div>
+                    <!--product-next-prev-->
+                    <div class="product-essential container">
+                        <div class="row">
+                            <form action="#" method="post" id="product_addtocart_form">
+                                <!--End For version 1, 2, 6 -->
+                                <!-- For version 3 -->
+                                <div class="product-img-box col-lg-5 col-sm-5 col-xs-12">
+                                    <div class="product-image">
+                                        <div class="product-full"><img id="product-zoom1" src="{{ car.photo.url }}"
+                                                                       data-zoom-image="{{ car.photo.url }}"
+                                                                       alt="product-image"/></div>
+                                        <div class="more-views">
+                                            <div class="slider-items-products">
+                                                <div id="gallery_02"
+                                                     class="product-flexslider hidden-buttons product-img-thumb">
+                                                    <div class="slider-items slider-width-col4 block-content">
+                                                        {% for rs in images %}
+                                                            <div class="more-views-items"><a href="#"
+                                                                                             data-image="{{ rs.image.url }}"
+                                                                                             data-zoom-image="{{ rs.image.url }}">
+                                                                <img id="product-zoom0" src="{{ rs.image.url }}"
+                                                                     alt="product-image"/> </a></div>
+                                                        {% endfor %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- end: more-images -->
+                                    <div class="toll-free"><a><i
+                                            class="fa fa-phone"></i>{{ car.owner.userprofile.phone }}</a></div>
+                                    <div class="ask-question"><a href="#!" onClick="myFunction()"><i
+                                            class="fa fa-question"></i> Ask a Question</a></div>
+                                    <br>
+                                    {% if messages %}
+                                        {% for message in messages %}
+                                            <div class="alert alert-{{ message.tags }}" role=alert">
+                                                {{ message }}
+                                            </div>
+                                        {% endfor %}
+                                    {% endif %}
+                                    <div id="myDIV">
+                                        <form class="form-list" action="" method="post">
+                                            {% csrf_token %}
+                                            {{ form.as_ul }}
+                                            <br>
+                                            <input class="button login" type="submit" value="SEND">
+                                        </form>
+                                    </div>
+                                </div>
+                                <!--End For version 1,2,6-->
+                                <!-- For version 3 -->
+                                <div class="product-shop col-lg- col-sm-7 col-xs-12">
+                                    <div class="brand">{{ car.manufacturer }}</div>
+                                    <div class="product-name">
+                                        <h1>{{ car.title }} </h1>
+                                    </div>
+                                    <div class="price-block">
+                                        <div class="price-box">
+
+                                            <p class="special-price"><span class="price-label">Special Price</span>
+                                                <span id="product-price-48" class="price">${{ car.price }}</span></p>
+                                        </div>
+                                    </div>
+
+                                    <div class="spec-row" id="summarySpecs">
+                                        <h2>Specifications</h2>
+                                        <table width="100%">
+                                            <tbody>
+                                            <tr>
+                                                <td class="label-spec"> Owner <span class="coln">:</span></td>
+                                                <td class="value-spec"> {{ car.owner }} </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="label-spec"> ad Date <span class="coln">:</span></td>
+                                                <td class="value-spec"> {{ car.create_at }} </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="label-spec"> Mileage <span class="coln">:</span></td>
+                                                <td class="value-spec"> {{ car.km }} </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="label-spec"> Engine Displ. <span class="coln">:</span></td>
+                                                <td class="value-spec">{{ car.engine_capacity }} </td>
+                                            </tr>
+                                            <tr class="odd">
+                                                <td class="label-spec"> Transmission <span class="coln">:</span></td>
+                                                <td class="value-spec"> {{ car.transmission }} </td>
+                                            </tr>
+                                            <tr class="odd">
+                                                <td class="label-spec"> Fuel Type <span class="coln">:</span></td>
+                                                <td class="value-spec"> {{ car.fuel_type }} </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="label-spec"> Model <span class="coln">:</span></td>
+                                                <td class="value-spec"> {{ car.year_of_production }} </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="label-spec"> Power Windows <span class="coln">:</span></td>
+                                                <td class="value-spec"> Yes</td>
+                                            </tr>
+                                            <tr class="odd">
+                                                <td class="label-spec"> Airbags <span class="coln">:</span></td>
+                                                <td class="value-spec"> Available</td>
+                                            </tr>
+                                            <tr class="odd">
+                                                <td class="label-spec"> ABS <span class="coln">:</span></td>
+                                                <td class="value-spec"> Yes</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="label-spec"> Central Locking <span class="coln">:</span></td>
+                                                <td class="value-spec"> Yes</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="label-spec"> Fog Lamps <span class="coln">:</span></td>
+                                                <td class="value-spec"> Front</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="email-addto-box">
+                                        <ul class="add-to-links">
+                                            <li><a class="link-wishlist"
+                                                   href="wishlist.html"><span>Add to Wishlist</span></a></li>
+                                            <li><a class="link-compare" href="compare.html"><span>Add to Compare</span></a>
+                                            </li>
+                                        </ul>
+                                        <p class="email-friend"><a href="#" class=""><span>Email to a Friend</span></a>
+                                        </p>
+                                    </div>
+                                    <div class="social">
+                                        <ul class="link">
+                                            <li class="fb"><a href="#"></a></li>
+                                            <li class="tw"><a href="#"></a></li>
+                                            <li class="googleplus"><a href="#"></a></li>
+                                            <li class="rss"><a href="#"></a></li>
+                                            <li class="pintrest"><a href="#"></a></li>
+                                            <li class="linkedin"><a href="#"></a></li>
+                                            <li class="youtube"><a href="#"></a></li>
+                                        </ul>
+                                    </div>
+                                    <ul class="shipping-pro">
+                                        <li>Free Servicing</li>
+                                        <li>Free Monthly Checkup</li>
+                                        <li>Extended Warrenty</li>
+                                    </ul>
+                                </div>
+                                <!--product-shop-->
+                                <!--Detail page static block for version 3-->
+                            </form>
                         </div>
-                      </div>
                     </div>
-                  </div>
-                  <!-- end: more-images -->
-                   <div class="toll-free"><a><i class="fa fa-phone"></i>{{ car.owner.userprofile.phone}}</a></div>
-                  <div class="ask-question"><a href="#" onClick="myFunction()"><i class="fa fa-question"></i> Ask a Question</a></div>
-                <br>
-                {% if messages %}
-                    {% for message in messages %}
-                        <div class="alert alert-{{ message.tags }}" role = alert">
-                            {{ message }}
+                    <!--product-essential-->
+                    <div class="product-collateral container">
+                        <ul id="product-detail-tab" class="nav nav-tabs product-tabs">
+                            <li class="active"><a href="#product_tabs_description" data-toggle="tab"> Vehicle
+                                Overview </a></li>
+                            <li><a href="#product_tabs_tags" data-toggle="tab">Technical Specification</a></li>
+                            <li><a href="#product_tabs_custom" data-toggle="tab">Accessories</a></li>
+
+                        </ul>
+                        <div id="productTabContent" class="tab-content">
+                            <div class="tab-pane fade in active" id="product_tabs_description">
+                                <div class="std">
+                                    <p>{{ car.details }}.</p>
+
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="product_tabs_tags">
+                                <div class="spec-row" id="summarySpecs">
+                                    <table width="100%">
+                                        <tbody>
+                                        <tr>
+                                            <td class="label-spec"> Mileage <span class="coln">:</span></td>
+                                            <td class="value-spec"> {{ car.km }} </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="label-spec"> Engine Displ. <span class="coln">:</span></td>
+                                            <td class="value-spec">{{ car.engine_capacity }} </td>
+                                        </tr>
+                                        <tr class="odd">
+                                            <td class="label-spec"> Transmission <span class="coln">:</span></td>
+                                            <td class="value-spec"> {{ car.transmission }} </td>
+                                        </tr>
+                                        <tr class="odd">
+                                            <td class="label-spec"> Fuel Type <span class="coln">:</span></td>
+                                            <td class="value-spec"> {{ car.fuel_type }} </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="label-spec"> Model <span class="coln">:</span></td>
+                                            <td class="value-spec"> {{ car.year_of_production }} </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="label-spec"> Power Windows <span class="coln">:</span></td>
+                                            <td class="value-spec"> Yes</td>
+                                        </tr>
+                                        <tr class="odd">
+                                            <td class="label-spec"> Airbags <span class="coln">:</span></td>
+                                            <td class="value-spec"> Available</td>
+                                        </tr>
+                                        <tr class="odd">
+                                            <td class="label-spec"> ABS <span class="coln">:</span></td>
+                                            <td class="value-spec"> Yes</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="label-spec"> Central Locking <span class="coln">:</span></td>
+                                            <td class="value-spec"> Yes</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="label-spec"> Fog Lamps <span class="coln">:</span></td>
+                                            <td class="value-spec"> Front</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade" id="product_tabs_custom">
+                                <div class="spec-row" id="summarySpecs">
+                                    <table width="100%">
+                                        <tbody>
+                                        <tr>
+                                            <td class="label-spec"> Air Conditioner <span class="coln">:</span></td>
+                                            <td class="value-spec"><i class="fa fa-check-circle"></i></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="label-spec"> AntiLock Braking System <span class="coln">:</span>
+                                            </td>
+                                            <td class="value-spec"><i class="fa fa-check-circle"></i></td>
+                                        </tr>
+                                        <tr class="odd">
+                                            <td class="label-spec"> Power Steering <span class="coln">:</span></td>
+                                            <td class="value-spec"><i class="fa fa-check-circle"></i></td>
+                                        </tr>
+                                        <tr class="odd">
+                                            <td class="label-spec"> Power Windows <span class="coln">:</span></td>
+                                            <td class="value-spec"><i class="fa fa-check-circle"></i></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="label-spec"> CD Player <span class="coln">:</span></td>
+                                            <td class="value-spec"><i class="fa fa-check-circle"></i></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="label-spec"> Leather Seats <span class="coln">:</span></td>
+                                            <td class="value-spec"><i class="fa fa-check-circle"></i></td>
+                                        </tr>
+                                        <tr class="odd">
+                                            <td class="label-spec"> Central Locking <span class="coln">:</span></td>
+                                            <td class="value-spec"><i class="fa fa-check-circle"></i></td>
+                                        </tr>
+                                        <tr class="odd">
+                                            <td class="label-spec"> Power Door Locks <span class="coln">:</span></td>
+                                            <td class="value-spec"><i class="fa fa-check-circle"></i></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="label-spec"> Brake Assist <span class="coln">:</span></td>
+                                            <td class="value-spec"><i class="fa fa-check-circle"></i></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="label-spec"> Driver Airbag <span class="coln">:</span></td>
+                                            <td class="value-spec"><i class="fa fa-check-circle"></i></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
-                    {% endfor %}
-                {% endif %}
-
-                        <form class="form-list" action="" method="post">
-                    {% csrf_token %}
-                    {{ form.as_p }}
-                    <input type="submit" value="SEND">
-                </form>
-                </div>
-                <!--End For version 1,2,6-->
-                <!-- For version 3 -->
-                <div class="product-shop col-lg- col-sm-7 col-xs-12">
-                  <div class="brand">{{ car.manufacturer }}</div>
-                  <div class="product-name">
-                    <h1>{{ car.title}} </h1>
-                  </div>
-                  <div class="price-block">
-                    <div class="price-box">
-
-                      <p class="special-price"> <span class="price-label">Special Price</span> <span id="product-price-48" class="price">${{car.price}}</span> </p>
                     </div>
-                  </div>
-
-                  <div class="spec-row" id="summarySpecs">
-                  <h2>Specifications</h2>
-                    <table width="100%">
-                        <tbody>
-                        <tr>
-                            <td class="label-spec"> Owner <span class="coln">:</span></td>
-                            <td class="value-spec"> {{ car.owner }} </td>
-                        </tr>
-                         <tr>
-                            <td class="label-spec"> ad Date <span class="coln">:</span></td>
-                            <td class="value-spec"> {{ car.create_at }} </td>
-                        </tr>
-                        <tr>
-                            <td class="label-spec"> Mileage <span class="coln">:</span></td>
-                            <td class="value-spec"> {{ car.km }} </td>
-                        </tr>
-                        <tr>
-                            <td class="label-spec"> Engine Displ. <span class="coln">:</span></td>
-                            <td class="value-spec">{{ car.engine_capacity }} </td>
-                        </tr>
-                        <tr class="odd">
-                            <td class="label-spec"> Transmission <span class="coln">:</span></td>
-                            <td class="value-spec"> {{ car.transmission }} </td>
-                        </tr>
-                        <tr class="odd">
-                            <td class="label-spec"> Fuel Type <span class="coln">:</span></td>
-                            <td class="value-spec"> {{ car.fuel_type }} </td>
-                        </tr>
-                        <tr>
-                            <td class="label-spec"> Model <span class="coln">:</span></td>
-                            <td class="value-spec"> {{ car.year_of_production }} </td>
-                        </tr>
-                        <tr>
-                            <td class="label-spec"> Power Windows <span class="coln">:</span></td>
-                            <td class="value-spec"> Yes</td>
-                        </tr>
-                        <tr class="odd">
-                            <td class="label-spec"> Airbags <span class="coln">:</span></td>
-                            <td class="value-spec"> Available</td>
-                        </tr>
-                        <tr class="odd">
-                            <td class="label-spec"> ABS <span class="coln">:</span></td>
-                            <td class="value-spec"> Yes</td>
-                        </tr>
-                        <tr>
-                            <td class="label-spec"> Central Locking <span class="coln">:</span></td>
-                            <td class="value-spec"> Yes</td>
-                        </tr>
-                        <tr>
-                            <td class="label-spec"> Fog Lamps <span class="coln">:</span></td>
-                            <td class="value-spec"> Front</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                  </div>
-                  <div class="email-addto-box">
-                    <ul class="add-to-links">
-                      <li> <a class="link-wishlist" href="wishlist.html"><span>Add to Wishlist</span></a></li>
-                      <li><a class="link-compare" href="compare.html"><span>Add to Compare</span></a></li>
-                    </ul>
-                    <p class="email-friend"><a href="#" class=""><span>Email to a Friend</span></a></p>
-                  </div>
-                  <div class="social">
-                    <ul class="link">
-                      <li class="fb"><a href="#"></a></li>
-                      <li class="tw"><a href="#"></a></li>
-                      <li class="googleplus"><a href="#"></a></li>
-                      <li class="rss"><a href="#"></a></li>
-                      <li class="pintrest"><a href="#"></a></li>
-                      <li class="linkedin"><a href="#"></a></li>
-                      <li class="youtube"><a href="#"></a></li>
-                    </ul>
-                  </div>
-                  <ul class="shipping-pro">
-                    <li>Free Servicing</li>
-                    <li>Free Monthly Checkup</li>
-                    <li>Extended Warrenty</li>
-                  </ul>
-                </div>
-                <!--product-shop-->
-                <!--Detail page static block for version 3-->
-              </form>
-            </div>
-          </div>
-          <!--product-essential-->
-          <div class="product-collateral container">
-            <ul id="product-detail-tab" class="nav nav-tabs product-tabs">
-              <li class="active"> <a href="#product_tabs_description" data-toggle="tab"> Vehicle Overview </a> </li>
-              <li><a href="#product_tabs_tags" data-toggle="tab">Technical Specification</a></li>
-             <li> <a href="#product_tabs_custom" data-toggle="tab">Accessories</a> </li>
-
-            </ul>
-            <div id="productTabContent" class="tab-content">
-              <div class="tab-pane fade in active" id="product_tabs_description">
-                <div class="std">
-                  <p>{{ car.details }}.</p>
 
                 </div>
-              </div>
-              <div class="tab-pane fade" id="product_tabs_tags">
-                <div class="spec-row" id="summarySpecs">
-                     <table width="100%">
-                      <tbody>
-                        <tr>
-                          <td class="label-spec"> Mileage <span class="coln">:</span></td>
-                          <td class="value-spec"> {{ car.km}} </td>
-                        </tr>
-                        <tr>
-                          <td class="label-spec"> Engine Displ. <span class="coln">:</span></td>
-                          <td class="value-spec">{{car.engine_capacity }} </td>
-                        </tr>
-                        <tr class="odd">
-                          <td class="label-spec"> Transmission <span class="coln">:</span></td>
-                          <td class="value-spec"> {{ car.transmission }} </td>
-                        </tr>
-                        <tr class="odd">
-                          <td class="label-spec"> Fuel Type <span class="coln">:</span></td>
-                          <td class="value-spec"> {{ car.fuel_type }} </td>
-                        </tr>
-                        <tr>
-                          <td class="label-spec"> Model <span class="coln">:</span></td>
-                          <td class="value-spec"> {{ car.year_of_production }} </td>
-                        </tr>
-                        <tr>
-                          <td class="label-spec"> Power Windows <span class="coln">:</span></td>
-                          <td class="value-spec"> Yes </td>
-                        </tr>
-                        <tr class="odd">
-                          <td class="label-spec"> Airbags <span class="coln">:</span></td>
-                          <td class="value-spec"> Available </td>
-                        </tr>
-                         <tr class="odd">
-                          <td class="label-spec"> ABS <span class="coln">:</span></td>
-                          <td class="value-spec"> Yes </td>
-                        </tr>
-                        <tr>
-                          <td class="label-spec"> Central Locking <span class="coln">:</span></td>
-                          <td class="value-spec"> Yes </td>
-                        </tr>
-                        <tr>
-                          <td class="label-spec"> Fog Lamps <span class="coln">:</span></td>
-                          <td class="value-spec"> Front </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-              </div>
-
-              <div class="tab-pane fade" id="product_tabs_custom">
-                <div class="spec-row" id="summarySpecs">
-                    <table width="100%">
-                      <tbody>
-                        <tr>
-                          <td class="label-spec"> Air Conditioner <span class="coln">:</span></td>
-                          <td class="value-spec"> <i class="fa fa-check-circle"></i> </td>
-                        </tr>
-                        <tr>
-                          <td class="label-spec"> AntiLock Braking System <span class="coln">:</span></td>
-                          <td class="value-spec"> <i class="fa fa-check-circle"></i> </td>
-                        </tr>
-                        <tr class="odd">
-                          <td class="label-spec"> Power Steering <span class="coln">:</span></td>
-                          <td class="value-spec"> <i class="fa fa-check-circle"></i> </td>
-                        </tr>
-                        <tr class="odd">
-                          <td class="label-spec"> Power Windows <span class="coln">:</span></td>
-                          <td class="value-spec"> <i class="fa fa-check-circle"></i> </td>
-                        </tr>
-                        <tr>
-                          <td class="label-spec"> CD Player <span class="coln">:</span></td>
-                          <td class="value-spec"> <i class="fa fa-check-circle"></i> </td>
-                        </tr>
-                        <tr>
-                          <td class="label-spec"> Leather Seats <span class="coln">:</span></td>
-                          <td class="value-spec"> <i class="fa fa-check-circle"></i> </td>
-                        </tr>
-                        <tr class="odd">
-                          <td class="label-spec"> Central Locking <span class="coln">:</span></td>
-                          <td class="value-spec"> <i class="fa fa-check-circle"></i> </td>
-                        </tr>
-                         <tr class="odd">
-                          <td class="label-spec"> Power Door Locks <span class="coln">:</span></td>
-                          <td class="value-spec"> <i class="fa fa-check-circle"></i> </td>
-                        </tr>
-                        <tr>
-                          <td class="label-spec"> Brake Assist <span class="coln">:</span></td>
-                          <td class="value-spec"> <i class="fa fa-check-circle"></i> </td>
-                        </tr>
-                        <tr>
-                          <td class="label-spec"> Driver Airbag <span class="coln">:</span></td>
-                          <td class="value-spec"> <i class="fa fa-check-circle"></i> </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-              </div>
+                <!--box-additional-->
+                <!--product-view-->
             </div>
-          </div>
-
         </div>
-        <!--box-additional-->
-        <!--product-view-->
-      </div>
+        <!--col-main-->
     </div>
-    <!--col-main-->
-  </div>
-  <!--main-container-->
+    <!--main-container-->
     <!-- JavaScript -->
-<script type="text/javascript" src="{% static 'js/jquery.min.js'%}"></script>
-<script type="text/javascript" src="{% static 'js/bootstrap.min.js'%}"></script>
-<script src="{% static 'js/bootstrap-slider.min.js'%}"></script>
-<script src="{% static 'js/bootstrap-select.min.js'%}"></script>
-<script type="text/javascript" src="{% static 'js/parallax.js'%}"></script>
-<script type="text/javascript" src="{% static 'js/revslider.js'%}"></script>
-<script type="text/javascript" src="{% static 'js/common.js'%}"></script>
-<script type="text/javascript" src="{% static 'js/jquery.bxslider.min.js'%}"></script>
-<script type="text/javascript" src="{% static 'js/owl.carousel.min.js'%}"></script>
-<script src="{% static 'js/cloud-zoom.js'%}"></script>
-<script type="text/javascript" src="{% static 'js/jquery.mobile-menu.min.js'%}"></script>
-<script type="text/javascript">
+    <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap-slider.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap-select.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/parallax.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/revslider.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/common.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery.bxslider.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'js/cloud-zoom.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery.mobile-menu.min.js' %}"></script>
+    <script type="text/javascript">
 
-    function myFunction()
-    {
-      var x = document.getElementById("myDIV");
-      if (x.style.display === "none") {
-        x.style.display = "block";
-      } else {
-        x.style.display = "none";
-      }
-}
+        function myFunction() {
+            var x = document.getElementById("myDIV");
+            if (x.style.display === "block") {
+                x.style.display = "none";
+            } else {
+                x.style.display = "block";
+            }
+        }
 
-    function HideMe()
-    {
-        jQuery('.popup1').hide();
-        jQuery('#fade').hide();
+        function HideMe() {
+            jQuery('.popup1').hide();
+            jQuery('#fade').hide();
 
 
-    }
-	function ShowMe()
-    {
-        jQuery('.popup2').show();
-        jQuery('#fade').show();
+        }
 
-    }
-		function ShowMe1()
-    {
-        jQuery('.popup3').show();
-        jQuery('#fade').show();
+        function ShowMe() {
+            jQuery('.popup2').show();
+            jQuery('#fade').show();
 
-    }
-	function HideMe1()
-    {
-        jQuery('.popup2').hide();
-        jQuery('#fade').hide();
+        }
 
+        function ShowMe1() {
+            jQuery('.popup3').show();
+            jQuery('#fade').show();
 
-    }
+        }
 
-		function HideMe2()
-    {
-        jQuery('.popup3').hide();
-        jQuery('#fade').hide();
+        function HideMe1() {
+            jQuery('.popup2').hide();
+            jQuery('#fade').hide();
 
 
-    }
-</script>
- {% endblock %}
+        }
+
+        function HideMe2() {
+            jQuery('.popup3').hide();
+            jQuery('#fade').hide();
+
+
+        }
+    </script>
+{% endblock %}

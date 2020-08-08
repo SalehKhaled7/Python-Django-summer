@@ -25,6 +25,7 @@
                 <div class="col-main col-sm-9 col-sm-push-3 product-grid">
                     <div class="pro-coloumn">
                         <article class="col-main">
+                        <hr>
                             <div class="toolbar">
                                 <div class="sorter">
                                     <div class="view-mode"><span title="Grid" class="button button-active button-grid">&nbsp;</span><a
@@ -172,7 +173,7 @@
                         <div class="box-content box-category">
                             <ul>
                                 {% recursetree category %}
-                                    <li><a href="/buy/{{ node.id }}/{{ node.slug }}">{{ node.title }}</a> <span class="subDropdown plus"></span>
+                                    <li><a {% if node.is_leaf_node %} href="/buy/{{ node.id }}/{{ node.slug }}"{% endif %}>{{ node.title }}</a>{% if not node.is_leaf_node %}<span class="subDropdown plus"></span>{% endif %}
                                         {% if not node.is_leaf_node %}
                                         <ul class="level0_455" style="display:none">
                                             <li><a href="#">{{ children }} </a> <span class=""></span></li>
