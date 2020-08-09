@@ -40,6 +40,8 @@ urlpatterns = [
     path('ads/<slug>/', VehicleDetailView.as_view(), name='VehicleDetailView'),
     path('search/', views.car_search, name='car_search'),
     path('search_auto/',views.car_search_auto, name='car_search_auto'),
+    path('filter/', views.vehicle_filter, name='vehicle_filter'),
+
 
     path('logout/',views.logout_view, name='logout_view'),
     path('login/',views.login_view, name='login_view'),

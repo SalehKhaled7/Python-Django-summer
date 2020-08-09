@@ -36,7 +36,7 @@
                             <div class="toolbar">
                                 <div class="sorter">
                                     <div class="view-mode"><span title="Grid" class="button button-active button-grid">&nbsp;</span><a
-                                            href="list.html" title="List" class="button-list">&nbsp;</a></div>
+                                            title="List" class="button-list">&nbsp;</a></div>
                                 </div>
                                 <div id="sort-by">
                                     <label class="left">Sort By: </label>
@@ -81,7 +81,7 @@
                             <div class="category-products">
                                 <!--main container starts here-->
                                 <ul class="products-grid">
-                                    {% for rs in cars %}
+                                    {% for rs in car %}
                                         <li class="item col-lg-4 col-md-3 col-sm-4 col-xs-6">
                                             <div class="item-inner">
                                                 <div class="item-img">
@@ -188,7 +188,7 @@
                                     <li><a {% if node.is_leaf_node %} href="/buy/{{ node.id }}/{{ node.slug }}"{% endif %}>{{ node.title }}</a>{% if not node.is_leaf_node %}<span class="subDropdown plus"></span>{% endif %}
                                         {% if not node.is_leaf_node %}
                                         <ul class="level0_455" style="display:none">
-                                            <li><a href="#">{{ children }} </a> <span class=""></span></li>
+                                            <li><a href="#">{{ children }} </a> <span class="color"></span></li>
                                             </li>
                                         </ul>
                                          {% endif %}

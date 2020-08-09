@@ -1,69 +1,27 @@
 {% load static %}
+{% load mytags %}
+{% category_list as category %}
+
 <div class="section-filter">
-            <div class="b-filter__inner bg-grey container">
-              <h2>this part is not ready yet</h2>
-              <form class="b-filter">
-                <div class="btn-group bootstrap-select">
-                  <select class="selectpicker" data-width="100%" tabindex="-98">
-                    <option>Select Make</option>
-                    <option>Make 1</option>
-                    <option>Make 2</option>
-                    <option>Make 3</option>
-                  </select>
-                </div>
-                <div class="btn-group bootstrap-select">
-                  <select class="selectpicker" data-width="100%" tabindex="-98">
-                    <option>Select Car Status</option>
-                    <option>Status 1</option>
-                    <option>Status 2</option>
-                    <option>Status 3</option>
-                  </select>
-                </div>
-                <div class="btn-group bootstrap-select">
-                  <select class="selectpicker" data-width="100%" tabindex="-98">
-                    <option>Select Model</option>
-                    <option>Model 1</option>
-                    <option>Model 2</option>
-                    <option>Model 3</option>
-                  </select>
-                </div>
-                <div class="btn-group bootstrap-select">
-                  <select class="selectpicker" data-width="100%" tabindex="-98">
-                    <option>Select All Locations</option>
-                    <option>Location 1</option>
-                    <option>Location 2</option>
-                    <option>Location 3</option>
-                  </select>
-                </div>
-                <div class="btn-group bootstrap-select">
-                  <select class="selectpicker" data-width="100%" tabindex="-98">
-                    <option>Select Year</option>
-                    <option>2017</option>
-                    <option>2016</option>
-                    <option>2015</option>
-                  </select>
-                </div>
-                <div class="ui-filter-slider">
-                  <div class="sidebar-widget-body m-t-10">
-                    <div class="price-range-holder"> <span class="min-max"> <span class="pull-left">$200.00</span> <span class="pull-right">$800.00</span> </span>
-                      <input type="text" class="price-slider" value="" style="display:block" >
-                    </div>
-                    <!-- /.price-range-holder -->
-                  </div>
-                </div>
-                <div>
-                  <div class="b-filter__btns">
+    <div class="b-filter__inner bg-grey container" style="z-index: 1;position: relative">
+        <h2>find your dream vehicle</h2>
+    <div style="text-align: center ;z-index: 5;position: relative">
+        <form method="get" action="/filter/">
+            {% csrf_token %}
+            {{ myFilter.form.as_p }}
+             <div class="b-filter__btns">
                     <button class="btn btn-lg btn-primary">search vehicle</button>
-                  </div>
                 </div>
-              </form>
-            </div>
-          </div>
+        </form>
+    </div>
+    </div>
+
+</div>
 
 
-    <!--Category silder End-->
+<!--Category silder End-->
 
-    <!--<div id="top">
+<!--<div id="top">
       <div class="container">
         <div class="row">
           <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"> <a href="#" data-scroll-goto="1"> <img src="{%static 'images/speakers.png' %}" alt="promotion-banner1"> </a> </div>
@@ -72,153 +30,177 @@
       </div>
     </div>-->
 
-    <!-- best Pro Slider -->
-    <section class=" wow bounceInUp animated">
-      <div class="hot_deals slider-items-products container">
+<!-- best Pro Slider -->
+<section class=" wow bounceInUp animated">
+    <div class="hot_deals slider-items-products container">
         <div class="new_title">
-          <h2>Deals of the Week</h2>
-          <div class="box-timer">
-            <div class="countbox_1 timer-grid"></div>
-          </div>
+            <h2>Deals of the Week</h2>
+            <div class="box-timer">
+                <div class="countbox_1 timer-grid"></div>
+            </div>
         </div>
         <div id="hot_deals" class="product-flexslider hidden-buttons">
-          <div class="slider-items slider-width-col4 products-grid">
-              <!--Item start-->
-            {% for rs in week_deals %}
-            <div class="item">
-              <div class="item-inner">
-                <div class="item-img">
-                  <div class="item-img-info"><a href="/car/{{ rs.id }}/{{ rs.slug }}" title="Retis lapen casen" class="product-image"><img src="{{ rs.photo.url }}" alt="Retis lapen casen"></a>
-                    <div class="new-label new-top-left">{{ rs.state }}</div>
-                    <div class="sale-label sale-top-left">-15%</div>
-                  </div>
-                </div>
-                <div class="item-info">
-                  <div class="info-inner">
-                    <div class="item-title"><a href="/car/{{ rs.id }}/{{ rs.slug }}" title="Retis lapen casen">{{rs.title}}</a> </div>
-                    <div class="item-content">
-                      <div class="rating">
-                        <div class="ratings">
-                          <div class="rating-box">
-                            <div class="rating" style="width:80%"></div>
-                          </div>
-                          <p class="rating-links"><a href="#">1 Review(s)</a> <span class="separator">|</span> <a href="#">Add Review</a> </p>
+            <div class="slider-items slider-width-col4 products-grid">
+                <!--Item start-->
+                {% for rs in week_deals %}
+                    <div class="item">
+                        <div class="item-inner">
+                            <div class="item-img">
+                                <div class="item-img-info"><a href="/car/{{ rs.id }}/{{ rs.slug }}"
+                                                              title="Retis lapen casen" class="product-image"><img
+                                        src="{{ rs.photo.url }}" alt="Retis lapen casen"></a>
+                                    <div class="new-label new-top-left">{{ rs.state }}</div>
+                                    <div class="sale-label sale-top-left">-15%</div>
+                                </div>
+                            </div>
+                            <div class="item-info">
+                                <div class="info-inner">
+                                    <div class="item-title"><a href="/car/{{ rs.id }}/{{ rs.slug }}"
+                                                               title="Retis lapen casen">{{ rs.title }}</a></div>
+                                    <div class="item-content">
+                                        <div class="rating">
+                                            <div class="ratings">
+                                                <div class="rating-box">
+                                                    <div class="rating" style="width:80%"></div>
+                                                </div>
+                                                <p class="rating-links"><a href="#">1 Review(s)</a> <span
+                                                        class="separator">|</span> <a href="#">Add Review</a></p>
+                                            </div>
+                                        </div>
+                                        <div class="item-price">
+                                            <div class="price-box"><span class="regular-price"><span
+                                                    class="price">${{ rs.price }}</span> </span></div>
+                                        </div>
+                                        <div class="other-info">
+                                            <div class="col-km"><i class="fa fa-tachometer"></i> {{ rs.km }}km</div>
+                                            <div class="col-engine"><i class="fa fa-gear"></i> {{ rs.transmission }}
+                                            </div>
+                                            <div class="col-date"><i class="fa fa-calendar"
+                                                                     aria-hidden="true"></i>{{ rs.year_of_production }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                      </div>
-                      <div class="item-price">
-                        <div class="price-box"><span class="regular-price"><span class="price">${{rs.price}}</span> </span> </div>
-                      </div>
-                      <div class="other-info">
-                        <div class="col-km"><i class="fa fa-tachometer"></i> {{ rs.km }}km</div>
-                        <div class="col-engine"><i class="fa fa-gear"></i> {{ rs.transmission }}</div>
-                        <div class="col-date"><i class="fa fa-calendar" aria-hidden="true"></i>{{ rs.year_of_production }}</div>
-                      </div>
                     </div>
-                  </div>
-                </div>
-              </div>
+                {% endfor %}
+                <!--Item END-->
             </div>
-            {% endfor %}
-              <!--Item END-->
-          </div>
         </div>
-      </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Logo Brand Block -->
-    <section class=" wow bounceInUp animated">
+<!-- Logo Brand Block -->
+<section class=" wow bounceInUp animated">
     <div class="best-pro slider-items-products container">
-      <div class="new_title">
-        <h2>Best Seller vehicles</h2>
-      </div>
-      <div id="best-seller" class="product-flexslider hidden-buttons">
-        <div class="slider-items slider-width-col4 products-grid">
-            <!--ITEM START-->
-            {% for rs in best_sell %}
-          <div class="item">
-            <div class="item-inner">
-              <div class="item-img">
-                <div class="item-img-info"><a href="/car/{{ rs.id }}/{{ rs.slug }}" title="Retis lapen casen" class="product-image"><img src="{{ rs.photo.url }}" alt="Retis lapen casen"></a>
-                  <div class="new-label new-top-left">Hot</div>
-                  <div class="sale-label sale-top-left">-15%</div>
-                </div>
-              </div>
-              <div class="item-info">
-                <div class="info-inner">
-                  <div class="item-title"><a href="/car/{{ rs.id }}/{{ rs.slug }}" title="Retis lapen casen">{{rs.title}}</a> </div>
-                  <div class="item-content">
-                    <div class="rating">
-                      <div class="ratings">
-                        <div class="rating-box">
-                          <div class="rating" style="width:80%"></div>
-                        </div>
-                        <p class="rating-links"><a href="#">1 Review(s)</a> <span class="separator">|</span> <a href="#">Add Review</a> </p>
-                      </div>
-                    </div>
-                    <div class="item-price">
-                      <div class="price-box"><span class="regular-price"><span class="price">${{rs.price}}</span> </span> </div>
-                    </div>
-                    <div class="other-info">
-                      <div class="col-km"><i class="fa fa-tachometer"></i> {{ rs.km }}km</div>
-                      <div class="col-engine"><i class="fa fa-gear"></i> {{ rs.transmission }}</div>
-                      <div class="col-date"><i class="fa fa-calendar" aria-hidden="true"></i> {{ rs.year_of_production }}</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-            {% endfor %}
-             <!--ITEM END-->
+        <div class="new_title">
+            <h2>Best Seller vehicles</h2>
         </div>
-      </div>
+        <div id="best-seller" class="product-flexslider hidden-buttons">
+            <div class="slider-items slider-width-col4 products-grid">
+                <!--ITEM START-->
+                {% for rs in best_sell %}
+                    <div class="item">
+                        <div class="item-inner">
+                            <div class="item-img">
+                                <div class="item-img-info"><a href="/car/{{ rs.id }}/{{ rs.slug }}"
+                                                              title="Retis lapen casen" class="product-image"><img
+                                        src="{{ rs.photo.url }}" alt="Retis lapen casen"></a>
+                                    <div class="new-label new-top-left">Hot</div>
+                                    <div class="sale-label sale-top-left">-15%</div>
+                                </div>
+                            </div>
+                            <div class="item-info">
+                                <div class="info-inner">
+                                    <div class="item-title"><a href="/car/{{ rs.id }}/{{ rs.slug }}"
+                                                               title="Retis lapen casen">{{ rs.title }}</a></div>
+                                    <div class="item-content">
+                                        <div class="rating">
+                                            <div class="ratings">
+                                                <div class="rating-box">
+                                                    <div class="rating" style="width:80%"></div>
+                                                </div>
+                                                <p class="rating-links"><a href="#">1 Review(s)</a> <span
+                                                        class="separator">|</span> <a href="#">Add Review</a></p>
+                                            </div>
+                                        </div>
+                                        <div class="item-price">
+                                            <div class="price-box"><span class="regular-price"><span
+                                                    class="price">${{ rs.price }}</span> </span></div>
+                                        </div>
+                                        <div class="other-info">
+                                            <div class="col-km"><i class="fa fa-tachometer"></i> {{ rs.km }}km</div>
+                                            <div class="col-engine"><i class="fa fa-gear"></i> {{ rs.transmission }}
+                                            </div>
+                                            <div class="col-date"><i class="fa fa-calendar"
+                                                                     aria-hidden="true"></i> {{ rs.year_of_production }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                <!--ITEM END-->
+            </div>
+        </div>
     </div>
-  </section>
-    <div class="brand-logo wow bounceInUp animated">
-      <div class="container">
+</section>
+<div class="brand-logo wow bounceInUp animated">
+    <div class="container">
         <div class="row">
-          <div class="home-banner col-lg-2 hidden-md col-xs-12 hidden-sm"> </div>
-          <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
-            <div class="testimonials-section">
-              <div class="offer-slider parallax parallax-2">
-                <ul class="bxslider">
-                  <li>
-                    <div class="avatar"><img src="{%static 'images/member1.png' %}" alt="Image"></div>
-                    <div class="testimonials">Perfect Themes and the best of all that you have many options to choose! Very fast responding! I highly recommend this theme and these people!</div>
-                    <div class="clients_author">Smith John <span>Happy Customer</span> </div>
-                  </li>
-                  <li>
-                    <div class="avatar"><img src="{%static 'images/member2.png' %}" alt="Image"></div>
-                    <div class="testimonials">Code, template and others are very good. The support has served me immediately and solved my problems when I need help. Are to be congratulated.</div>
-                    <div class="clients_author">Sahara Anderson <span>Happy Customer</span> </div>
-                  </li>
-                  <li>
-                    <div class="avatar"><img src="{%static 'images/member3.png' %}" alt="Image"></div>
-                    <div class="testimonials">Our support and response has been amazing, helping me with several issues I came across and got them solved almost the same day. A pleasure to work with them! </div>
-                    <div class="clients_author">Stephen Smith <span>Happy Customer</span> </div>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="logo-brand container">
-    <div class="brand-title">
-      <h2>Popular Brands</h2>
-    </div>
-        <div class="slider-items-products">
-            <div id="brand-slider" class="product-flexslider hidden-buttons">
-                <div class="slider-items slider-width-col6">
-                    <!-- Item -->
-                    {% for rs in brands %}
-                        <div class="item">
-                            <div class="logo-item"><a href="#"><img src="{{ rs.image.url }}" alt="Image"></a></div>
-                        </div>
-                    {% endfor %}
-                    <!-- End Item -->
+            <div class="home-banner col-lg-2 hidden-md col-xs-12 hidden-sm"></div>
+            <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
+                <div class="testimonials-section">
+                    <div class="offer-slider parallax parallax-2">
+                        <ul class="bxslider">
+                            <li>
+                                <div class="avatar"><img src="{% static 'images/member1.png' %}" alt="Image"></div>
+                                <div class="testimonials">Perfect Themes and the best of all that you have many options
+                                    to choose! Very fast responding! I highly recommend this theme and these people!
+                                </div>
+                                <div class="clients_author">Smith John <span>Happy Customer</span></div>
+                            </li>
+                            <li>
+                                <div class="avatar"><img src="{% static 'images/member2.png' %}" alt="Image"></div>
+                                <div class="testimonials">Code, template and others are very good. The support has
+                                    served me immediately and solved my problems when I need help. Are to be
+                                    congratulated.
+                                </div>
+                                <div class="clients_author">Sahara Anderson <span>Happy Customer</span></div>
+                            </li>
+                            <li>
+                                <div class="avatar"><img src="{% static 'images/member3.png' %}" alt="Image"></div>
+                                <div class="testimonials">Our support and response has been amazing, helping me with
+                                    several issues I came across and got them solved almost the same day. A pleasure to
+                                    work with them!
+                                </div>
+                                <div class="clients_author">Stephen Smith <span>Happy Customer</span></div>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
-  </div>
+    </div>
+</div>
+<div class="logo-brand container">
+    <div class="brand-title">
+        <h2>Popular Brands</h2>
+    </div>
+    <div class="slider-items-products">
+        <div id="brand-slider" class="product-flexslider hidden-buttons">
+            <div class="slider-items slider-width-col6">
+                <!-- Item -->
+                {% for rs in brands %}
+                    <div class="item">
+                        <div class="logo-item"><a href="#"><img src="{{ rs.image.url }}" alt="Image"></a></div>
+                    </div>
+                {% endfor %}
+                <!-- End Item -->
+            </div>
+        </div>
+    </div>
+</div>

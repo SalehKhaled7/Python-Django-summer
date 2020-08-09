@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'ckeditor_uploader',
     'mptt',
     'crispy_forms',
+    'django_filters',
 
 ]
 

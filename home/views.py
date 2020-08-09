@@ -9,6 +9,7 @@ from home.forms import SearchForm
 from home.models import Setting, ContactForm, ContactFormMessage, FAQ
 from user.forms import SignUpForm
 from user.models import UserProfile
+from .filters import VehicleFilter
 
 
 def index(request):
@@ -18,6 +19,9 @@ def index(request):
     week_deals = Car.objects.filter(status='True')[:5]
     best_sell = Car.objects.filter(status='True').order_by('?')[:5]
     brands = Brand.objects.all()
+    dist_brands = Car.objects.order_by().values('manufacturer').distinct()
+    dist_year = Car.objects.order_by().values('year_of_production').distinct()
+    myFilter = VehicleFilter()
     #menu =Menu.objects.all()
     context = {'setting': setting,
                'page':'index',
@@ -26,6 +30,9 @@ def index(request):
                'week_deals': week_deals,
                'best_sell': best_sell,
                'brands': brands,
+               'dist_brands': dist_brands,
+               'dist_year': dist_year,
+               'myFilter': myFilter,
                #'menu': menu,
                }
     return render(request,'index.html',context)
@@ -118,6 +125,7 @@ def car_search(request):
     return HttpResponseRedirect('/')
 
 
+
 def car_search_auto(request):
     if request.is_ajax():
         q = request.GET.get('term', '')
@@ -132,6 +140,18 @@ def car_search_auto(request):
         data = 'fail'
     mimetype = 'application/json'
     return HttpResponse(data, mimetype)
+
+def vehicle_filter(request):
+    car = Car.objects.all()
+    myFilter = VehicleFilter(request.GET,queryset=car)
+    car = myFilter.qs
+    category = Category.objects.all()
+    context = {'car': car,
+               # 'myFilter': myFilter,
+               'category': category,
+               }
+    return render(request, 'vehicle_filter.html', context)
+
 
 
 def logout_view(request):

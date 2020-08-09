@@ -3,6 +3,8 @@
 {% load mytags %}
 {% category_list as category%}
 {% menu_list as menu %}
+{% home_top_msg1 as top_msg1 %}
+{% home_top_msg2 as top_msg2 %}
 <head>
     <style>
         #logo {
@@ -52,9 +54,8 @@
                             <div class="col-lg-6 col-xs-12 col-sm-6 col-md-6">
                                 <div class="assetBlock">
                                     <div style="height: 20px; overflow: hidden;" id="slideshow">
-                                        <p style="display: block;">Hot days! - <span>50%</span> Get ready for summer!
-                                        </p>
-                                        <p style="display: none;">Save up to <span>40%</span> Hurry limited offer!</p>
+                                        <p style="display: block;">{{ top_msg1.detail|safe}}</p>
+                                        <p style="display: none;">{{ top_msg2.detail|safe}}</p>
                                     </div>
                                 </div>
                             </div>
