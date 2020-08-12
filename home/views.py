@@ -74,7 +74,7 @@ def contact(request):
 
 def buy_a_car(request, id, slug):
     setting = Setting.objects.get()
-    cars = Car.objects.filter(category_id=id)
+    cars = Car.objects.filter(category_id=id ,status=True)
     category = Category.objects.all()
     context = {'setting': setting,
                'category': category,
@@ -117,7 +117,7 @@ def car_search(request):
         if form.is_valid():
             #category = Category.objects.all()
             query = form.cleaned_data['query']
-            cars = Car.objects.filter(title__icontains=query)
+            cars = Car.objects.filter(title__icontains=query ,status=True)
             context = {'cars': cars,
                        #'category': category,
                        }
@@ -129,7 +129,7 @@ def car_search(request):
 def car_search_auto(request):
     if request.is_ajax():
         q = request.GET.get('term', '')
-        cars = Car.objects.filter(title__icontains=q)
+        cars = Car.objects.filter(title__icontains=q , status=True)
         results = []
         for rs in cars:
             car_json = {}
@@ -143,7 +143,7 @@ def car_search_auto(request):
 
 def vehicle_filter(request):
     car = Car.objects.all()
-    myFilter = VehicleFilter(request.GET,queryset=car)
+    myFilter = VehicleFilter(request.GET,queryset=car.filter(status=True))
     car = myFilter.qs
     category = Category.objects.all()
     context = {'car': car,
