@@ -1,18 +1,40 @@
 {% load static %}
 {% load mytags %}
 {% category_list as category %}
+{% block hrad %}
+    <style>
+    .inp {
+        width: 300px;
+        height: 40px;
+    }
+     .filter_form li{
+        padding-bottom: 10px;
+        list-style-type: none;
+    }
+    .filter_form li label{
+        padding-bottom: 10px;
+        list-style-type: none;
+        color: white;
+        font-size: 17px;
+    }
+    </style>
+{% endblock %}
 
 <div class="section-filter">
     <div class="b-filter__inner bg-grey container" style="z-index: 1;position: relative">
         <h2>find your dream vehicle</h2>
     <div style="text-align: center ;z-index: 5;position: relative">
-        <form method="get" action="/filter/">
+
+        <form class="te" method="get" action="/filter/">
+            <ul class="filter_form">
             {% csrf_token %}
-            {{ myFilter.form.as_p }}
+            {{ myFilter.form.as_ul}}
+                </ul>
              <div class="b-filter__btns">
                     <button class="btn btn-lg btn-primary">search vehicle</button>
                 </div>
         </form>
+
     </div>
     </div>
 
@@ -107,8 +129,7 @@
                                 <div class="item-img-info"><a href="/car/{{ rs.id }}/{{ rs.slug }}"
                                                               title="Retis lapen casen" class="product-image"><img
                                         src="{{ rs.photo.url }}" alt="Retis lapen casen"></a>
-                                    <div class="new-label new-top-left">Hot</div>
-                                    <div class="sale-label sale-top-left">-15%</div>
+
                                 </div>
                             </div>
                             <div class="item-info">
@@ -148,44 +169,7 @@
         </div>
     </div>
 </section>
-<div class="brand-logo wow bounceInUp animated">
-    <div class="container">
-        <div class="row">
-            <div class="home-banner col-lg-2 hidden-md col-xs-12 hidden-sm"></div>
-            <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
-                <div class="testimonials-section">
-                    <div class="offer-slider parallax parallax-2">
-                        <ul class="bxslider">
-                            <li>
-                                <div class="avatar"><img src="{% static 'images/member1.png' %}" alt="Image"></div>
-                                <div class="testimonials">Perfect Themes and the best of all that you have many options
-                                    to choose! Very fast responding! I highly recommend this theme and these people!
-                                </div>
-                                <div class="clients_author">Smith John <span>Happy Customer</span></div>
-                            </li>
-                            <li>
-                                <div class="avatar"><img src="{% static 'images/member2.png' %}" alt="Image"></div>
-                                <div class="testimonials">Code, template and others are very good. The support has
-                                    served me immediately and solved my problems when I need help. Are to be
-                                    congratulated.
-                                </div>
-                                <div class="clients_author">Sahara Anderson <span>Happy Customer</span></div>
-                            </li>
-                            <li>
-                                <div class="avatar"><img src="{% static 'images/member3.png' %}" alt="Image"></div>
-                                <div class="testimonials">Our support and response has been amazing, helping me with
-                                    several issues I came across and got them solved almost the same day. A pleasure to
-                                    work with them!
-                                </div>
-                                <div class="clients_author">Stephen Smith <span>Happy Customer</span></div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+
 <div class="logo-brand container">
     <div class="brand-title">
         <h2>Popular Brands</h2>

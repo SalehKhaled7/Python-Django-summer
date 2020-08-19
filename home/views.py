@@ -14,7 +14,7 @@ from .filters import VehicleFilter
 
 def index(request):
     setting = Setting.objects.get()
-    slider_data = Car.objects.filter(status='True')[:5]
+    slider_data = Car.objects.filter(status='True')[:6]
     #category = Category.objects.all()
     week_deals = Car.objects.filter(status='True')[:5]
     best_sell = Car.objects.filter(status='True').order_by('?')[:5]

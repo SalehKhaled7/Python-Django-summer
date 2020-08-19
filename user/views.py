@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
 from django.forms import  modelformset_factory
 from django.http import HttpResponseRedirect, Http404
@@ -162,3 +163,9 @@ def user_msg(request):
                #'category': category,
                 }
     return render(request, 'user_msg.html', context)
+
+@login_required(login_url='/login')
+def user_delete_msg(request,id):
+    ContactFormMessage.objects.filter(id=id,send_to=request.user).delete()
+    messages.success(request,'message deleted')
+    return HttpResponseRedirect('/user/msg')
